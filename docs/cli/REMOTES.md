@@ -33,21 +33,30 @@ mailctl create remotes <name> [<name>...] [flags]
 ```
 
 ### Flags
+- `-u`, `--username string` - SMTP username (required)
 - `-p`, `--password` - Set password interactively
-- `-m`, `--password-method string` - Password hash method (default: "bcrypt")
+- `--password-method string` - Password hashing method (default: "bcrypt", options: "bcrypt" or "argon2id")
+- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
 - `--password-stdin` - Set password from stdin
-- `--disabled bool` - Create remote(s) as disabled
+- `--port int` - SMTP port (default: 25)
+- `-d`, `--disabled` - Create remote in disabled state
 
 ### Examples
 ```sh
 # Create with interactive password prompt
-mailctl create remotes smtp.relay.com --password
+mailctl create remotes smtp.relay.com --username myuser --password
 
 # Create with password from stdin
-echo "password" | mailctl create remotes smtp.relay.com --password-stdin
+echo "password" | mailctl create remotes smtp.relay.com --username myuser --password-stdin
+
+# Create with custom bcrypt cost
+mailctl create remotes smtp.relay.com --username myuser --password --password-hash-options "14"
+
+# Create with argon2id instead of default bcrypt
+mailctl create remotes smtp.relay.com --username myuser --password --password-method argon2id
 
 # Create disabled remote
-mailctl create remotes smtp.relay.com --disabled --password
+mailctl create remotes smtp.relay.com --username myuser --disabled --password
 ```
 
 ## Patch
@@ -59,9 +68,10 @@ mailctl patch remote <name> [flags]
 ```
 
 ### Flags
-- `--enabled bool` - Enable or disable the remote
-- `-p`, `--password` - Set password interactively
-- `-m`, `--password-method string` - Password hash method (default: "bcrypt")
+- `-e`, `--enabled bool` - Enable or disable the remote
+- `-p`, `--password` - Update password interactively
+- `--password-method string` - Password hashing method (default: "bcrypt", options: "bcrypt" or "argon2id")
+- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
 - `--password-stdin` - Set password from stdin
 - `--no-password` - Remove password
 
@@ -72,6 +82,12 @@ mailctl patch remote smtp.relay.com --password
 
 # Update password from stdin
 echo "newpassword" | mailctl patch remote smtp.relay.com --password-stdin
+
+# Update password with higher bcrypt cost
+mailctl patch remote smtp.relay.com --password --password-hash-options "14"
+
+# Remove password
+mailctl patch remote smtp.relay.com --no-password
 
 # Enable/disable remote
 mailctl patch remote smtp.relay.com --enabled=false

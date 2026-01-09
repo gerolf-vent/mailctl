@@ -41,14 +41,15 @@ mailctl create mailboxes <email> [email...] [flags]
 ```
 
 ### Flags
-- `--password` - Set password interactively (prompts)
+- `-p`, `--password` - Set password interactively (prompts)
 - `--password-stdin` - Read password from stdin
-- `--password-method string` - Password hashing method (default: "bcrypt")
+- `--password-method string` - Password hashing method (default: "argon2id", options: "bcrypt" or "argon2id")
+- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
 - `--quota int32` - Mailbox quota in bytes
 - `--transport string` - Transport name for this mailbox
-- `--login-disabled` - Disable login (authentication)
-- `--receiving-disabled` - Disable receiving email
-- `--sending-disabled` - Disable sending email
+- `-l`, `--login-disabled` - Disable login (authentication)
+- `-r`, `--receiving-disabled` - Disable receiving email
+- `-s`, `--sending-disabled` - Disable sending email
 
 ### Examples
 ```sh
@@ -57,6 +58,12 @@ mailctl create mailboxes user@example.com --password
 
 # Create with password from stdin
 echo "secretpassword" | mailctl create mailboxes user@example.com --password-stdin
+
+# Create with custom password hash options (argon2id with higher security)
+mailctl create mailboxes user@example.com --password --password-hash-options "m=131072,t=3,p=4"
+
+# Create with bcrypt and custom cost
+mailctl create mailboxes user@example.com --password --password-method bcrypt --password-hash-options "12"
 
 # Create with login disabled
 mailctl create mailboxes user@example.com --login-disabled
@@ -74,14 +81,16 @@ mailctl patch mailbox <email> [flags]
 ```
 
 ### Flags
-- `--password` - Update password interactively (prompts)
+- `-p`, `--password` - Update password interactively (prompts)
 - `--password-stdin` - Read new password from stdin
-- `--password-method string` - Password hashing method (default: "bcrypt")
-- `--quota int32` - New quota in bytes
+- `--password-method string` - Password hashing method (default: "argon2id", options: "bcrypt" or "argon2id")
+- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
+- `--no-password` - Remove password
+- `-q`, `--quota int32` - New quota in bytes
 - `--transport string` - New transport name
-- `--login-enabled bool` - Enable or disable login
-- `--receiving-enabled bool` - Enable or disable receiving email
-- `--sending-enabled bool` - Enable or disable sending email
+- `-l`, `--login bool` - Enable or disable login
+- `-r`, `--receiving bool` - Enable or disable receiving email
+- `-s`, `--sending bool` - Enable or disable sending email
 
 ### Examples
 ```sh
@@ -91,11 +100,17 @@ mailctl patch mailbox user@example.com --password
 # Update password from stdin
 echo "newpassword" | mailctl patch mailbox user@example.com --password-stdin
 
+# Update password with custom argon2id settings
+mailctl patch mailbox user@example.com --password --password-hash-options "m=262144,t=4,p=8"
+
+# Remove password
+mailctl patch mailbox user@example.com --no-password
+
 # Update quota
 mailctl patch mailbox user@example.com --quota 10737418240  # 10GB
 
 # Enable/disable login
-mailctl patch mailbox user@example.com --login-enabled=false
+mailctl patch mailbox user@example.com --login=false
 ```
 
 ## Rename
