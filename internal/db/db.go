@@ -9,16 +9,17 @@ import (
 )
 
 type Config struct {
-	Host     string
-	Port     string
-	User     string
-	DBName   string
-	SSLMode  string
-	Password string
+	Host      string
+	Port      string
+	User      string
+	DBName    string
+	SSLMode   string
+	Password  string
+	TLSCACert string
 }
 
 func (c Config) DSN() string {
-	return fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=%s password=%s",
+	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=%s password=%s",
 		c.Host,
 		c.Port,
 		c.User,
@@ -26,16 +27,24 @@ func (c Config) DSN() string {
 		c.SSLMode,
 		c.Password,
 	)
+
+	// Add CA certificate path if provided and SSL mode requires verification
+	if c.TLSCACert != "" && (c.SSLMode == "verify-ca" || c.SSLMode == "verify-full") {
+		dsn += fmt.Sprintf(" sslrootcert=%s", c.TLSCACert)
+	}
+
+	return dsn
 }
 
 func GetConfig() Config {
 	return Config{
-		Host:     getEnv("DB_HOST", "localhost"),
-		Port:     getEnv("DB_PORT", "5432"),
-		User:     getEnv("DB_USER", "mail"),
-		DBName:   getEnv("DB_NAME", "mail"),
-		SSLMode:  getEnv("DB_SSLMODE", "disable"),
-		Password: os.Getenv("DB_PASSWORD"),
+		Host:      getEnv("DB_HOST", "localhost"),
+		Port:      getEnv("DB_PORT", "5432"),
+		User:      getEnv("DB_USER", "mail"),
+		DBName:    getEnv("DB_NAME", "mail"),
+		SSLMode:   getEnv("DB_SSLMODE", "disable"),
+		Password:  os.Getenv("DB_PASSWORD"),
+		TLSCACert: os.Getenv("DB_TLSCACERT"),
 	}
 }
 

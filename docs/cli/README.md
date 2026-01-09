@@ -10,6 +10,7 @@
 | `DB_USER` | Database user                 | `mail`            |
 | `DB_PASSWORD` | Database password         | (empty)                |
 | `DB_SSLMODE` | SSL mode for database connection | `disable`          |
+| `DB_TLSCACERT` | Path to CA certificate file for SSL verification | (empty) |
 
 ## Commands
 
