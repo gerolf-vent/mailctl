@@ -23,6 +23,7 @@ func init() {
 	rootCmd.AddCommand(RenameCmd)
 	rootCmd.AddCommand(DisableCmd)
 	rootCmd.AddCommand(DeleteCmd)
+	rootCmd.AddCommand(EnableCmd)
 	rootCmd.AddCommand(RestoreCmd)
 	rootCmd.AddCommand(SchemaCmd)
 }
