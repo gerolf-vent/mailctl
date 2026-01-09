@@ -18,6 +18,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	// Add main commands
 	rootCmd.AddCommand(ListCmd)
+	rootCmd.AddCommand(DescribeCmd)
 	rootCmd.AddCommand(CreateCmd)
 	rootCmd.AddCommand(PatchCmd)
 	rootCmd.AddCommand(RenameCmd)
