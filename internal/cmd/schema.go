@@ -15,4 +15,6 @@ func init() {
 	SchemaCmd.AddCommand(SchemaStatusCmd)
 	SchemaCmd.AddCommand(SchemaUpgradeCmd)
 	SchemaCmd.AddCommand(SchemaPurgeCmd)
+	SchemaCmd.AddCommand(SchemaEnsureUserCmd)
+	SchemaCmd.AddCommand(SchemaDropUserCmd)
 }
