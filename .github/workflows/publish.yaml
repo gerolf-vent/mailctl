@@ -42,5 +42,5 @@ jobs:
         with:
           archs: amd64
           config: ./container-image/apko.yaml
-          tag: "ghcr.io/${{ github.repository_owner }}/metaleg-agent:${{ steps.manifest.outputs.version_full }} ghcr.io/${{ github.repository_owner }}/metaleg-agent:${{ steps.manifest.outputs.version }} ghcr.io/${{ github.repository_owner }}/metaleg-agent:${{ steps.manifest.outputs.version_1 }} ghcr.io/${{ github.repository_owner }}/metaleg-agent:${{ steps.manifest.outputs.version_2 }} ghcr.io/${{ github.repository_owner }}/metaleg-agent:latest"
+          tag: "ghcr.io/${{ github.repository }}:${{ steps.manifest.outputs.version_full }} ghcr.io/${{ github.repository }}:${{ steps.manifest.outputs.version }} ghcr.io/${{ github.repository }}:${{ steps.manifest.outputs.version_1 }} ghcr.io/${{ github.repository }}:${{ steps.manifest.outputs.version_2 }} ghcr.io/${{ github.repository }}:latest"
           keyring-append: ./build/melange.rsa.pub
