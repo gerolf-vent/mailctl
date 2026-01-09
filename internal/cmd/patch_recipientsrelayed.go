@@ -48,6 +48,6 @@ var PatchRecipientsRelayedCmd = &cobra.Command{
 }
 
 func init() {
-	PatchRecipientsRelayedCmd.Flags().Bool("enabled", false, "Enable or disable the relayed recipient")
+	PatchRecipientsRelayedCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the relayed recipient")
 	PatchRecipientsRelayedCmd.Flags().String("email", "", "New email address")
 }

@@ -56,7 +56,7 @@ var PatchDomainsCmd = &cobra.Command{
 }
 
 func init() {
-	PatchDomainsCmd.Flags().Bool("enabled", false, "Enable or disable the domain")
+	PatchDomainsCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the domain")
 	PatchDomainsCmd.Flags().String("transport", "", "New transport name (only for managed/relayed domains)")
 	PatchDomainsCmd.Flags().String("target-domain", "", "New target domain FQDN (only for canonical domains)")
 }

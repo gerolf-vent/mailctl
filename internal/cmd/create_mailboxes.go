@@ -80,12 +80,12 @@ var CreateMailboxesCmd = &cobra.Command{
 }
 
 func init() {
-	CreateMailboxesCmd.Flags().Bool("password", false, "Set password interactively (prompts)")
-	CreateMailboxesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\")")
+	CreateMailboxesCmd.Flags().BoolP("password", "p", false, "Set password interactively (prompts)")
+	CreateMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\")")
 	CreateMailboxesCmd.Flags().Bool("password-stdin", false, "Read password from stdin")
 	CreateMailboxesCmd.Flags().Int32("quota", 0, "Mailbox quota in bytes")
 	CreateMailboxesCmd.Flags().String("transport", "", "Transport name for this mailbox")
-	CreateMailboxesCmd.Flags().Bool("login-disabled", false, "Disable login (authentication)")
-	CreateMailboxesCmd.Flags().Bool("receiving-disabled", false, "Disable receiving email")
-	CreateMailboxesCmd.Flags().Bool("sending-disabled", false, "Disable sending email")
+	CreateMailboxesCmd.Flags().BoolP("login-disabled", "l", false, "Disable login (authentication)")
+	CreateMailboxesCmd.Flags().BoolP("receiving-disabled", "r", false, "Disable receiving email")
+	CreateMailboxesCmd.Flags().BoolP("sending-disabled", "s", false, "Disable sending email")
 }

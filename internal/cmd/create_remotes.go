@@ -61,11 +61,11 @@ var CreateRemotesCmd = &cobra.Command{
 }
 
 func init() {
-	CreateRemotesCmd.Flags().String("username", "", "SMTP username (required)")
+	CreateRemotesCmd.Flags().StringP("username", "u", "", "SMTP username (required)")
 	CreateRemotesCmd.MarkFlagRequired("username")
-	CreateRemotesCmd.Flags().Bool("password", false, "Set password interactively (prompts)")
-	CreateRemotesCmd.Flags().String("password-method", "ARGON2ID", "Password hashing method (default: \"ARGON2ID\")")
+	CreateRemotesCmd.Flags().BoolP("password", "p", false, "Set password interactively (prompts)")
+	CreateRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\")")
 	CreateRemotesCmd.Flags().Bool("password-stdin", false, "Read password from stdin")
 	CreateRemotesCmd.Flags().Int("port", 25, "SMTP port (default: 25)")
-	CreateRemotesCmd.Flags().Bool("enabled", true, "Enable or disable the remote (default: true)")
+	CreateRemotesCmd.Flags().BoolP("disabled", "d", false, "Create the remote in disabled state")
 }

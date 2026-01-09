@@ -43,7 +43,10 @@ var CreateTransportsCmd = &cobra.Command{
 }
 
 func init() {
-	CreateTransportsCmd.Flags().String("type", "", "Transport type: 'local', 'smtp', or 'relay' (required)")
-	CreateTransportsCmd.MarkFlagRequired("type")
-	CreateTransportsCmd.Flags().String("remote", "", "Remote server hostname (required for smtp/relay types)")
+	CreateTransportsCmd.Flags().StringP("method", "m", "", "Transport method (required, e.g. 'lmtp', 'smtp', or 'relay')")
+	CreateTransportsCmd.MarkFlagRequired("method")
+	CreateTransportsCmd.Flags().StringP("host", "h", "", "Remote server hostname (required)")
+	CreateTransportsCmd.MarkFlagRequired("host")
+	CreateTransportsCmd.Flags().Uint16("port", 0, "Transport port")
+	CreateTransportsCmd.Flags().Bool("mx-lookup", false, "Enable MX lookup")
 }

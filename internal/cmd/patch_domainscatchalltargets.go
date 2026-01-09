@@ -52,6 +52,6 @@ var PatchDomainCatchallTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	PatchDomainCatchallTargetsCmd.Flags().Bool("enabled", false, "Enable or disable the catchall target")
-	PatchDomainCatchallTargetsCmd.Flags().Bool("fallback-only", false, "Set fallback-only mode")
+	PatchDomainCatchallTargetsCmd.Flags().BoolP("forward", "f", false, "Enable or disable forwarding to the catchall target")
+	PatchDomainCatchallTargetsCmd.Flags().BoolP("fallback-only", "b", false, "Set fallback-only mode")
 }

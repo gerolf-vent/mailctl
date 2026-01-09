@@ -69,5 +69,5 @@ func init() {
 	CreateDomainsCmd.Flags().String("transport", "", "Transport name (required for managed/relayed domains)")
 	CreateDomainsCmd.Flags().String("target-domain", "", "Target domain FQDN (required for canonical domains)")
 	CreateDomainsCmd.Flags().StringP("type", "t", "managed", "Domain type: 'managed', 'relayed', 'alias' or 'canonical' (default: \"managed\")")
-	CreateDomainsCmd.Flags().Bool("disabled", false, "Create in disabled state")
+	CreateDomainsCmd.Flags().BoolP("disabled", "d", false, "Create in disabled state")
 }

@@ -73,11 +73,9 @@ var PatchRemotesCmd = &cobra.Command{
 }
 
 func init() {
-	PatchRemotesCmd.Flags().Bool("enabled", false, "Enable or disable the remote")
-	PatchRemotesCmd.Flags().String("username", "", "New SMTP username")
-	PatchRemotesCmd.Flags().Bool("password", false, "Update password interactively (prompts)")
-	PatchRemotesCmd.Flags().String("password-method", "ARGON2ID", "Password hashing method")
+	PatchRemotesCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the remote")
+	PatchRemotesCmd.Flags().BoolP("password", "p", false, "Update password interactively (prompts)")
+	PatchRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\")")
 	PatchRemotesCmd.Flags().Bool("password-stdin", false, "Read new password from stdin")
-	PatchRemotesCmd.Flags().Int("port", 0, "New SMTP port")
 	PatchRemotesCmd.Flags().Bool("no-password", false, "Remove password")
 }

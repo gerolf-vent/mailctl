@@ -59,8 +59,8 @@ var PatchTransportsCmd = &cobra.Command{
 }
 
 func init() {
-	PatchTransportsCmd.Flags().String("method", "", "New transport method (lmtp, smtp, relay)")
-	PatchTransportsCmd.Flags().String("host", "", "New transport host")
+	PatchTransportsCmd.Flags().StringP("method", "m", "", "New transport method (lmtp, smtp, relay)")
+	PatchTransportsCmd.Flags().StringP("host", "h", "", "New transport host")
 	PatchTransportsCmd.Flags().Uint16("port", 0, "New transport port")
 	PatchTransportsCmd.Flags().Bool("mx-lookup", false, "Enable/disable MX lookup")
 }

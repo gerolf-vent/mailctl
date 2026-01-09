@@ -41,3 +41,7 @@ var CreateAliasesCmd = &cobra.Command{
 		return nil
 	},
 }
+
+func init() {
+	CreateAliasesCmd.Flags().BoolP("disabled", "d", false, "Create the alias in disabled state")
+}

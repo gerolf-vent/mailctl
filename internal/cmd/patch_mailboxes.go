@@ -91,13 +91,13 @@ var PatchMailboxesCmd = &cobra.Command{
 }
 
 func init() {
-	PatchMailboxesCmd.Flags().Bool("password", false, "Update password interactively (prompts)")
-	PatchMailboxesCmd.Flags().String("password-method", "bcrypt", "Password hashing method")
+	PatchMailboxesCmd.Flags().BoolP("password", "p", false, "Update password interactively (prompts)")
+	PatchMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\")")
 	PatchMailboxesCmd.Flags().Bool("password-stdin", false, "Read new password from stdin")
 	PatchMailboxesCmd.Flags().Bool("no-password", false, "Remove password")
-	PatchMailboxesCmd.Flags().Int32("quota", 0, "New quota in bytes")
+	PatchMailboxesCmd.Flags().Int32P("quota", "q", 0, "New quota in bytes")
 	PatchMailboxesCmd.Flags().String("transport", "", "New transport name")
-	PatchMailboxesCmd.Flags().Bool("login-enabled", true, "Enable or disable login")
-	PatchMailboxesCmd.Flags().Bool("receiving-enabled", true, "Enable or disable receiving email")
-	PatchMailboxesCmd.Flags().Bool("sending-enabled", true, "Enable or disable sending email")
+	PatchMailboxesCmd.Flags().BoolP("login", "l", true, "Enable or disable login")
+	PatchMailboxesCmd.Flags().BoolP("receiving", "r", true, "Enable or disable receiving email")
+	PatchMailboxesCmd.Flags().BoolP("sending", "s", true, "Enable or disable sending email")
 }

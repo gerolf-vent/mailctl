@@ -52,5 +52,5 @@ var SchemaPurgeCmd = &cobra.Command{
 }
 
 func init() {
-	SchemaPurgeCmd.Flags().Bool("confirm", false, "Confirm database purge (required)")
+	SchemaPurgeCmd.Flags().BoolP("confirm", "c", false, "Confirm database purge (required)")
 }

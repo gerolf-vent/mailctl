@@ -49,5 +49,5 @@ var PatchAliasesCmd = &cobra.Command{
 }
 
 func init() {
-	PatchAliasesCmd.Flags().Bool("enabled", false, "Enable or disable the alias")
+	PatchAliasesCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the alias")
 }

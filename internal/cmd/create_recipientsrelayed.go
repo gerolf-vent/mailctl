@@ -43,5 +43,5 @@ var CreateRecipientsRelayedCmd = &cobra.Command{
 }
 
 func init() {
-	CreateRecipientsRelayedCmd.Flags().Bool("enabled", true, "Enable or disable the relayed recipient (default: true)")
+	CreateRecipientsRelayedCmd.Flags().BoolP("disabled", "d", false, "Create the relayed recipient in disabled state")
 }
