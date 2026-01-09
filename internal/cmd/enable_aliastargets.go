@@ -56,6 +56,6 @@ var EnableAliasTargetsCmd = &cobra.Command{
 }
 
 func init() {
-	EnableCmd.Flags().BoolP("forward", "f", false, "Enable forwarding to target")
-	EnableCmd.Flags().BoolP("send", "s", false, "Enable sending from target")
+	EnableAliasTargetsCmd.Flags().BoolP("forward", "f", false, "Enable forwarding to target")
+	EnableAliasTargetsCmd.Flags().BoolP("send", "s", false, "Enable sending from target")
 }

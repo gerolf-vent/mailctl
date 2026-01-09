@@ -57,7 +57,7 @@ var EnableMailboxesCmd = &cobra.Command{
 }
 
 func init() {
-	EnableCmd.Flags().BoolP("login", "l", false, "Enable login only")
-	EnableCmd.Flags().BoolP("receiving", "r", false, "Enable receiving only")
-	EnableCmd.Flags().BoolP("sending", "s", false, "Enable sending only")
+	EnableMailboxesCmd.Flags().BoolP("login", "l", false, "Enable login only")
+	EnableMailboxesCmd.Flags().BoolP("receiving", "r", false, "Enable receiving only")
+	EnableMailboxesCmd.Flags().BoolP("sending", "s", false, "Enable sending only")
 }
