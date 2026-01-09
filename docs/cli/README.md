@@ -11,6 +11,8 @@
 | `DB_PASSWORD` | Database password         | (empty)                |
 | `DB_SSLMODE` | SSL mode for database connection | `disable`          |
 | `DB_TLSCACERT` | Path to CA certificate file for SSL verification | (empty) |
+| `DB_TLSCERT` | Path to client certificate file for mutual TLS | (empty) |
+| `DB_TLSKEY` | Path to client private key file for mutual TLS | (empty) |
 
 ## Commands
 

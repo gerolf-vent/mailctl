@@ -15,6 +15,8 @@ type Config struct {
 	DBName    string
 	SSLMode   string
 	Password  string
+	TLSCert   string
+	TLSKey    string
 	TLSCACert string
 }
 
@@ -33,6 +35,10 @@ func (c Config) DSN() string {
 		dsn += fmt.Sprintf(" sslrootcert=%s", c.TLSCACert)
 	}
 
+	if c.TLSCert != "" && c.TLSKey != "" {
+		dsn += fmt.Sprintf(" sslcert=%s sslkey=%s", c.TLSCert, c.TLSKey)
+	}
+
 	return dsn
 }
 
@@ -44,6 +50,8 @@ func GetConfig() Config {
 		DBName:    getEnv("DB_NAME", "mail"),
 		SSLMode:   getEnv("DB_SSLMODE", "disable"),
 		Password:  os.Getenv("DB_PASSWORD"),
+		TLSCert:   os.Getenv("DB_TLSCERT"),
+		TLSKey:    os.Getenv("DB_TLSKEY"),
 		TLSCACert: os.Getenv("DB_TLSCACERT"),
 	}
 }
