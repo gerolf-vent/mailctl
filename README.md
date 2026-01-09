@@ -1,4 +1,10 @@
 # mailctl
+[![Release](https://img.shields.io/github/v/release/gerolf-vent/mailctl)](https://github.com/gerolf-vent/mailctl/releases)
+[![License](https://img.shields.io/github/license/gerolf-vent/mailctl)](https://github.com/gerolf-vent/mailctl/blob/main/LICENSE)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gerolf-vent/mailctl)](https://goreportcard.com/report/github.com/gerolf-vent/mailctl)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/gerolf-vent/mailctl)](https://github.com/gerolf-vent/mailctl)
+[![Last Commit](https://img.shields.io/github/last-commit/gerolf-vent/mailctl)](https://github.com/gerolf-vent/mailctl/commits/main)
+
 Another mail system configuration manager for Postfix/Dovecot and other MTAs/MDAs, but written in Go and easily deployable within modern infrastructure.
 
 ## Features
