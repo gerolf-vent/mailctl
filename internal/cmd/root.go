@@ -21,6 +21,7 @@ func init() {
 	rootCmd.AddCommand(CreateCmd)
 	rootCmd.AddCommand(PatchCmd)
 	rootCmd.AddCommand(DeleteCmd)
+	rootCmd.AddCommand(RestoreCmd)
 	rootCmd.AddCommand(SchemaCmd)
 }
 
