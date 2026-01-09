@@ -19,6 +19,7 @@ var CreateMailboxesCmd = &cobra.Command{
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
 		flagPasswordMethod, _ := cmd.Flags().GetString("password-method")
+		flagPasswordHashOptions, _ := cmd.Flags().GetString("password-hash-options")
 		flagQuota, _ := cmd.Flags().GetInt32("quota")
 		flagTransportName, _ := cmd.Flags().GetString("transport")
 		flagLoginDisabled, _ := cmd.Flags().GetBool("login-disabled")
@@ -45,7 +46,7 @@ var CreateMailboxesCmd = &cobra.Command{
 		}
 
 		if flagPassword || flagPasswordStdin {
-			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordStdin)
+			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordHashOptions, flagPasswordStdin)
 			if err != nil {
 				utils.PrintErrorWithMessage("failed to read password", err)
 				return nil
@@ -81,7 +82,8 @@ var CreateMailboxesCmd = &cobra.Command{
 
 func init() {
 	CreateMailboxesCmd.Flags().BoolP("password", "p", false, "Set password interactively (prompts)")
-	CreateMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\")")
+	CreateMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\", options: \"bcrypt\" or \"argon2id\")")
+	CreateMailboxesCmd.Flags().String("password-hash-options", "", "Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)")
 	CreateMailboxesCmd.Flags().Bool("password-stdin", false, "Read password from stdin")
 	CreateMailboxesCmd.Flags().Int32("quota", 0, "Mailbox quota in bytes")
 	CreateMailboxesCmd.Flags().String("transport", "", "Transport name for this mailbox")

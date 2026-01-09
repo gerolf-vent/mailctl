@@ -19,6 +19,7 @@ var CreateRemotesCmd = &cobra.Command{
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
 		flagPasswordMethod, _ := cmd.Flags().GetString("password-method")
+		flagPasswordHashOptions, _ := cmd.Flags().GetString("password-hash-options")
 		flagDisabled, _ := cmd.Flags().GetBool("disabled")
 
 		if flagPassword && flagPasswordStdin {
@@ -34,7 +35,7 @@ var CreateRemotesCmd = &cobra.Command{
 		}
 
 		if flagPassword || flagPasswordStdin {
-			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordStdin)
+			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordHashOptions, flagPasswordStdin)
 			if err != nil {
 				utils.PrintErrorWithMessage("failed to read password", err)
 				return nil
@@ -64,7 +65,8 @@ func init() {
 	CreateRemotesCmd.Flags().StringP("username", "u", "", "SMTP username (required)")
 	CreateRemotesCmd.MarkFlagRequired("username")
 	CreateRemotesCmd.Flags().BoolP("password", "p", false, "Set password interactively (prompts)")
-	CreateRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\")")
+	CreateRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\", options: \"bcrypt\" or \"argon2id\")")
+	CreateRemotesCmd.Flags().String("password-hash-options", "", "Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)")
 	CreateRemotesCmd.Flags().Bool("password-stdin", false, "Read password from stdin")
 	CreateRemotesCmd.Flags().Int("port", 25, "SMTP port (default: 25)")
 	CreateRemotesCmd.Flags().BoolP("disabled", "d", false, "Create the remote in disabled state")

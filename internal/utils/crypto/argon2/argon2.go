@@ -28,6 +28,60 @@ func (ipe InvalidHashParameterError) Error() string {
 	return fmt.Sprintf("invalid argon2id hash parameter: %s", string(ipe))
 }
 
+func ParseHashParameters(params string) (time, memory uint32, threads uint8, err error) {
+	if params == "" {
+		return
+	}
+
+	paramsParts := strings.Split(params, ",")
+	if len(paramsParts) != 3 {
+		err = InvalidHashFormatError("invalid paramsParts format")
+		return
+	}
+
+	for _, paramPart := range paramsParts {
+		paramSubParts := strings.SplitN(paramPart, "=", 2)
+		if len(paramSubParts) != 2 {
+			err = InvalidHashFormatError("invalid parameter format")
+			return
+		}
+
+		key, value := paramSubParts[0], paramSubParts[1]
+
+		switch key {
+		case "m":
+			var parsedValue int64
+			parsedValue, err = strconv.ParseInt(value, 10, 32)
+			if err != nil {
+				err = InvalidHashParameterError("unable to parse memory parameter")
+				return
+			}
+			memory = uint32(parsedValue)
+		case "t":
+			var parsedValue int64
+			parsedValue, err = strconv.ParseInt(value, 10, 32)
+			if err != nil {
+				err = InvalidHashParameterError("unable to parse time parameter")
+				return
+			}
+			time = uint32(parsedValue)
+		case "p":
+			var parsedValue int64
+			parsedValue, err = strconv.ParseInt(value, 10, 32)
+			if err != nil {
+				err = InvalidHashParameterError("unable to parse threads parameter")
+				return
+			}
+			threads = uint8(parsedValue)
+		default:
+			err = InvalidHashParameterError("unknown parameter")
+			return
+		}
+	}
+
+	return
+}
+
 func parseArgon2IDHash(hashedPassword []byte) (version uint8, time, memory uint32, threads uint8, salt, hash []byte, err error) {
 	if len(hashedPassword) == 0 {
 		err = errors.New("hashed password is empty")
@@ -40,12 +94,12 @@ func parseArgon2IDHash(hashedPassword []byte) (version uint8, time, memory uint3
 		return
 	}
 
-	var emptyPart, identifierPart, versionPart, parametersPart, saltPart, hashPart string
+	var emptyPart, identifierPart, versionPart, paramsPartsPart, saltPart, hashPart string
 	if len(hashParts) == 6 {
 		emptyPart = hashParts[0]
 		identifierPart = hashParts[1]
 		versionPart = hashParts[2]
-		parametersPart = hashParts[3]
+		paramsPartsPart = hashParts[3]
 		saltPart = hashParts[4]
 		hashPart = hashParts[5]
 	} else {
@@ -53,7 +107,7 @@ func parseArgon2IDHash(hashedPassword []byte) (version uint8, time, memory uint3
 		emptyPart = hashParts[0]
 		identifierPart = hashParts[1]
 		versionPart = ""
-		parametersPart = hashParts[2]
+		paramsPartsPart = hashParts[2]
 		saltPart = hashParts[3]
 		hashPart = hashParts[4]
 	}
@@ -95,53 +149,12 @@ func parseArgon2IDHash(hashedPassword []byte) (version uint8, time, memory uint3
 	}
 
 	// Parse parameters
-	parameters := strings.Split(parametersPart, ",")
-	if len(parameters) != 3 {
-		err = InvalidHashFormatError("invalid parameters format")
+	time, memory, threads, err = ParseHashParameters(paramsPartsPart)
+	if err != nil {
 		return
 	}
 
-	for _, paramStr := range parameters {
-		paramParts := strings.SplitN(paramStr, "=", 2)
-		if len(paramParts) != 2 {
-			err = InvalidHashFormatError("invalid parameter format")
-			return
-		}
-
-		key, value := paramParts[0], paramParts[1]
-
-		switch key {
-		case "m":
-			var parsedValue int64
-			parsedValue, err = strconv.ParseInt(value, 10, 32)
-			if err != nil {
-				err = InvalidHashParameterError("unable to parse memory parameter")
-				return
-			}
-			memory = uint32(parsedValue)
-		case "t":
-			var parsedValue int64
-			parsedValue, err = strconv.ParseInt(value, 10, 32)
-			if err != nil {
-				err = InvalidHashParameterError("unable to parse time parameter")
-				return
-			}
-			time = uint32(parsedValue)
-		case "p":
-			var parsedValue int64
-			parsedValue, err = strconv.ParseInt(value, 10, 32)
-			if err != nil {
-				err = InvalidHashParameterError("unable to parse threads parameter")
-				return
-			}
-			threads = uint8(parsedValue)
-		default:
-			err = InvalidHashParameterError("unknown parameter")
-			return
-		}
-	}
-
-	// Check if all parameters are set
+	// Check if all paramsParts are set
 	if memory == 0 {
 		err = InvalidHashParameterError("memory parameter not set")
 		return

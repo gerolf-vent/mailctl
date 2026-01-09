@@ -18,6 +18,7 @@ var PatchMailboxesCmd = &cobra.Command{
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
 		flagPasswordMethod, _ := cmd.Flags().GetString("password-method")
+		flagPasswordHashOptions, _ := cmd.Flags().GetString("password-hash-options")
 		flagPasswordNo, _ := cmd.Flags().GetBool("no-password")
 
 		if (flagPassword || flagPasswordStdin) && flagPasswordNo {
@@ -37,7 +38,7 @@ var PatchMailboxesCmd = &cobra.Command{
 
 		options := db.MailboxesPatchOptions{}
 		if flagPassword || flagPasswordStdin {
-			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordStdin)
+			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordHashOptions, flagPasswordStdin)
 			if err != nil {
 				utils.PrintErrorWithMessage("failed to read password", err)
 				return nil
@@ -92,7 +93,8 @@ var PatchMailboxesCmd = &cobra.Command{
 
 func init() {
 	PatchMailboxesCmd.Flags().BoolP("password", "p", false, "Update password interactively (prompts)")
-	PatchMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\")")
+	PatchMailboxesCmd.Flags().String("password-method", "argon2id", "Password hashing method (default: \"argon2id\", options: \"bcrypt\" or \"argon2id\")")
+	PatchMailboxesCmd.Flags().String("password-hash-options", "", "Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)")
 	PatchMailboxesCmd.Flags().Bool("password-stdin", false, "Read new password from stdin")
 	PatchMailboxesCmd.Flags().Bool("no-password", false, "Remove password")
 	PatchMailboxesCmd.Flags().Int32P("quota", "q", 0, "New quota in bytes")

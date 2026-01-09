@@ -18,6 +18,7 @@ var PatchRemotesCmd = &cobra.Command{
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
 		flagPasswordMethod, _ := cmd.Flags().GetString("password-method")
+		flagPasswordHashOptions, _ := cmd.Flags().GetString("password-hash-options")
 		flagPasswordNo, _ := cmd.Flags().GetBool("no-password")
 
 		if (flagPassword || flagPasswordStdin) && flagPasswordNo {
@@ -42,7 +43,7 @@ var PatchRemotesCmd = &cobra.Command{
 		}
 
 		if flagPassword || flagPasswordStdin {
-			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordStdin)
+			passwordHash, err := ReadPasswordHashed(flagPasswordMethod, flagPasswordHashOptions, flagPasswordStdin)
 			if err != nil {
 				utils.PrintErrorWithMessage("failed to read password", err)
 				return nil
@@ -75,7 +76,8 @@ var PatchRemotesCmd = &cobra.Command{
 func init() {
 	PatchRemotesCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the remote")
 	PatchRemotesCmd.Flags().BoolP("password", "p", false, "Update password interactively (prompts)")
-	PatchRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\")")
+	PatchRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\", options: \"bcrypt\" or \"argon2id\")")
+	PatchRemotesCmd.Flags().String("password-hash-options", "", "Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)")
 	PatchRemotesCmd.Flags().Bool("password-stdin", false, "Read new password from stdin")
 	PatchRemotesCmd.Flags().Bool("no-password", false, "Remove password")
 }
