@@ -1,0 +1,13 @@
+contents:
+  keyring:
+  - ./build/melange.rsa.pub
+  repositories:
+  - https://dl-cdn.alpinelinux.org/alpine/edge/main
+  - '@build ./build/packages'
+  packages:
+  - mailctl@build
+  - alpine-baselayout
+  - alpine-release
+
+entrypoint:
+  command: mailctl
