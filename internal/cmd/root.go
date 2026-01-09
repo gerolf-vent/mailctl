@@ -19,6 +19,8 @@ func init() {
 	// Add main commands
 	rootCmd.AddCommand(ListCmd)
 	rootCmd.AddCommand(CreateCmd)
+	rootCmd.AddCommand(PatchCmd)
+	rootCmd.AddCommand(DeleteCmd)
 	rootCmd.AddCommand(SchemaCmd)
 }
 
