@@ -8,10 +8,10 @@ import (
 )
 
 var RestoreTransportsCmd = &cobra.Command{
-	Use:     "transports <name> [name...]",
+	Use:     "transports <name> [<name>...]",
 	Aliases: []string{"transport"},
-	Short:   "Restore a soft-deleted transport",
-	Long:    "Restore a soft-deleted transport.",
+	Short:   "Restores soft-deleted transports",
+	Long:    "Restores soft-deleted transports.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		runner := db.TxForEachRunner[string]{
@@ -20,7 +20,7 @@ var RestoreTransportsCmd = &cobra.Command{
 				return db.Transports(tx).Restore(item)
 			},
 			ItemString:     func(item string) string { return item },
-			FailureMessage: "Failed to restore transport",
+			FailureMessage: "failed to restore transport",
 			SuccessMessage: "Successfully restored transport",
 		}
 

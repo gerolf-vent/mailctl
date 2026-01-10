@@ -10,10 +10,10 @@ import (
 )
 
 var DeleteAliasesCmd = &cobra.Command{
-	Use:     "aliases <email> [email...]",
+	Use:     "aliases [flags] <email> [<email>...]",
 	Aliases: []string{"alias"},
 	Short:   "Deletes aliases",
-	Long:    "Deletes aliases. By default performs a soft delete. Use --permanent for hard delete.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Deletes aliases. By default performs a soft delete. Use --permanent for hard delete.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")

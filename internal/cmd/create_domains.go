@@ -10,10 +10,10 @@ import (
 )
 
 var CreateDomainsCmd = &cobra.Command{
-	Use:     "domains <fqdn> [fqdn...]",
+	Use:     "domains [flags] <fqdn> [<fqdn>...]",
 	Aliases: []string{"domain"},
-	Short:   "Create a new domain",
-	Long:    "Creates a new domain of the specified type.\nFQDNs must be valid domain names.",
+	Short:   "Creates new domains",
+	Long:    "Creates new domains. Supported domain types are 'managed', 'relayed', 'alias' and 'canonical'.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDisabled, _ := cmd.Flags().GetBool("disabled")

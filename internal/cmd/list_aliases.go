@@ -32,10 +32,11 @@ func listAliases(options db.AliasesListOptions) ([]db.Alias, error) {
 }
 
 var ListAliasesCmd = &cobra.Command{
-	Use:   "aliases [domain...]",
-	Short: "List aliases",
-	Long:  "List aliases.\nIf a domains are provided, only aliases for these domains are listed.",
-	Args:  cobra.MinimumNArgs(0),
+	Use:     "aliases [flags] [<domain>...]",
+	Aliases: []string{"alias"},
+	Short:   "List aliases",
+	Long:    "List aliases. If domains are provided, only aliases for these domains are listed.",
+	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

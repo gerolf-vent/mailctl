@@ -10,10 +10,10 @@ import (
 )
 
 var CreateRemotesCmd = &cobra.Command{
-	Use:     "remotes <hostname> [hostname...]",
+	Use:     "remotes <hostname> [<hostname>...]",
 	Aliases: []string{"remote"},
-	Short:   "Create a new remote",
-	Long:    "Creates a new remote SMTP relay server configuration.",
+	Short:   "Creates new remotes",
+	Long:    "Creates new remotes.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPassword, _ := cmd.Flags().GetBool("password")
@@ -27,7 +27,7 @@ var CreateRemotesCmd = &cobra.Command{
 		}
 
 		if len(args) > 1 && (flagPassword || flagPasswordStdin) {
-			return fmt.Errorf("cannot set password while creating multiple mailboxes")
+			return fmt.Errorf("cannot set password while creating multiple remotes")
 		}
 
 		options := db.RemotesCreateOptions{
@@ -62,12 +62,9 @@ var CreateRemotesCmd = &cobra.Command{
 }
 
 func init() {
-	CreateRemotesCmd.Flags().StringP("username", "u", "", "SMTP username (required)")
-	CreateRemotesCmd.MarkFlagRequired("username")
 	CreateRemotesCmd.Flags().BoolP("password", "p", false, "Set password interactively (prompts)")
 	CreateRemotesCmd.Flags().String("password-method", "bcrypt", "Password hashing method (default: \"bcrypt\", options: \"bcrypt\" or \"argon2id\")")
 	CreateRemotesCmd.Flags().String("password-hash-options", "", "Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)")
 	CreateRemotesCmd.Flags().Bool("password-stdin", false, "Read password from stdin")
-	CreateRemotesCmd.Flags().Int("port", 25, "SMTP port (default: 25)")
 	CreateRemotesCmd.Flags().BoolP("disabled", "d", false, "Create the remote in disabled state")
 }

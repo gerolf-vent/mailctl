@@ -10,11 +10,11 @@ import (
 )
 
 var PatchRecipientsRelayedCmd = &cobra.Command{
-	Use:     "recipients-relayed <email> [flags]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
-	Short:   "Update an existing relayed recipient",
-	Long:    "Updates properties of an existing relayed recipient. Emails must be in the format \"name@example.com\".",
-	Args:    cobra.ExactArgs(1),
+	Use:     "recipients-relayed [flags] <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
+	Short:   "Updates existing relayed recipients",
+	Long:    "Updates specified properties for existing relayed recipients. Emails must be in the format \"name@example.com\".",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagEnabled, _ := cmd.Flags().GetBool("enabled")
 
@@ -49,5 +49,4 @@ var PatchRecipientsRelayedCmd = &cobra.Command{
 
 func init() {
 	PatchRecipientsRelayedCmd.Flags().BoolP("enabled", "e", false, "Enable or disable the relayed recipient")
-	PatchRecipientsRelayedCmd.Flags().String("email", "", "New email address")
 }

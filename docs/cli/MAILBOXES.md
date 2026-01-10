@@ -16,7 +16,7 @@ Shows a table of all mailboxes or outputs them as JSON. Can be filtered by domai
 
 ### Usage
 ```sh
-mailctl list mailboxes [domain...] [flags]
+mailctl list mailboxes [flags] [<domain>...]
 ```
 
 ### Flags
@@ -37,15 +37,15 @@ Creates a new mailbox with the specified email address.
 
 ### Usage
 ```sh
-mailctl create mailboxes <email> [email...] [flags]
+mailctl create mailboxes [flags] <email> [<email>...]
 ```
 
 ### Flags
 - `-p`, `--password` - Set password interactively (prompts)
 - `--password-stdin` - Read password from stdin
 - `--password-method string` - Password hashing method (default: "argon2id", options: "bcrypt" or "argon2id")
-- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
-- `--quota int32` - Mailbox quota in bytes
+- `--password-hash-options string` - Password hash options (bcrypt: `<cost>`; argon2id: m=`<number>`,t=`<number>`,p=`<number>`)
+- `-q`, `--quota int32` - Mailbox quota in bytes
 - `--transport string` - Transport name for this mailbox
 - `-l`, `--login-disabled` - Disable login (authentication)
 - `-r`, `--receiving-disabled` - Disable receiving email
@@ -77,14 +77,14 @@ Updates properties of an existing mailbox.
 
 ### Usage
 ```sh
-mailctl patch mailbox <email> [flags]
+mailctl patch mailboxes [flags] <email> [<email>...]
 ```
 
 ### Flags
 - `-p`, `--password` - Update password interactively (prompts)
 - `--password-stdin` - Read new password from stdin
 - `--password-method string` - Password hashing method (default: "argon2id", options: "bcrypt" or "argon2id")
-- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
+- `--password-hash-options string` - Password hash options (bcrypt: `<cost>`; argon2id: m=`<number>`,t=`<number>`,p=`<number>`)
 - `--no-password` - Remove password
 - `-q`, `--quota int32` - New quota in bytes
 - `--transport string` - New transport name
@@ -126,7 +126,7 @@ Enables features of a disabled mailbox. It does not throw an error if the mailbo
 
 ### Usage
 ```sh
-mailctl enable mailboxes <email> [email...] [flags]
+mailctl enable mailboxes [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -139,7 +139,7 @@ Disables features of an active mailbox. It does not throw an error if the mailbo
 
 ### Usage
 ```sh
-mailctl disable mailboxes <email> [email...] [flags]
+mailctl disable mailboxes [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -152,7 +152,7 @@ Soft-deletes a mailbox. The mailbox can be restored later. Use `--permanent` to 
 
 ### Usage
 ```sh
-mailctl delete mailboxes <email> [email...] [flags]
+mailctl delete mailboxes [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -164,5 +164,5 @@ Restores a soft-deleted mailbox.
 
 ### Usage
 ```sh
-mailctl restore mailboxes <email> [email...]
+mailctl restore mailboxes <email> [<email>...]
 ```

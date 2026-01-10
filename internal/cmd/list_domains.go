@@ -32,10 +32,11 @@ func listDomains(options db.DomainsListOptions) ([]db.Domain, error) {
 }
 
 var ListDomainsCmd = &cobra.Command{
-	Use:   "domains",
-	Short: "List domains",
-	Long:  "List domains.",
-	Args:  cobra.MinimumNArgs(0),
+	Use:     "domains [flags]",
+	Aliases: []string{"domain"},
+	Short:   "List domains",
+	Long:    "List domains.",
+	Args:    cobra.MinimumNArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

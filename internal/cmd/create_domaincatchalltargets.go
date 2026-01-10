@@ -10,10 +10,10 @@ import (
 )
 
 var CreateDomainCatchallTargetsCmd = &cobra.Command{
-	Use:     "catchall-targets <domain> <target-email> [target-email...]",
-	Aliases: []string{"catchall-target", "catchall"},
-	Short:   "Create a new catch-all target for a domain",
-	Long:    "Add a catch-all target to a domain.",
+	Use:     "catchall-targets [flags] <domain> <target-email> [<target-email>...]",
+	Aliases: []string{"catchall-target", "catchalls", "catchall"},
+	Short:   "Creates new catch-all targets for a domain",
+	Long:    "Creates new catch-all targets for a domain.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagForward, _ := cmd.Flags().GetBool("forward")

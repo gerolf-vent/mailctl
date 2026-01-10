@@ -8,9 +8,11 @@ import (
 )
 
 var EnableRemotesCmd = &cobra.Command{
-	Use:   "remotes <name> [<name>...]",
-	Short: "Enable one or more remotes",
-	Args:  cobra.MinimumNArgs(1),
+	Use:     "remotes <name> [<name>...]",
+	Aliases: []string{"remote"},
+	Short:   "Enables remotes",
+	Long:    "Enables remotes.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		enabled := true
 		options := db.RemotesPatchOptions{
@@ -23,7 +25,7 @@ var EnableRemotesCmd = &cobra.Command{
 				return db.Remotes(tx).Patch(item, options)
 			},
 			ItemString:     func(item string) string { return item },
-			FailureMessage: "Failed to enable remote",
+			FailureMessage: "failed to enable remote",
 			SuccessMessage: "Successfully enabled remote",
 		}
 

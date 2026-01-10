@@ -9,7 +9,8 @@ import (
 
 var DisableRemotesCmd = &cobra.Command{
 	Use:   "remotes <name> [<name>...]",
-	Short: "Disable one or more remotes",
+	Short: "Disables remotes",
+	Long:  "Disables remotes.",
 	Args:  cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		enabled := false
@@ -23,7 +24,7 @@ var DisableRemotesCmd = &cobra.Command{
 				return db.Remotes(tx).Patch(item, options)
 			},
 			ItemString:     func(item string) string { return item },
-			FailureMessage: "Failed to disable remote",
+			FailureMessage: "failed to disable remote",
 			SuccessMessage: "Successfully disabled remote",
 		}
 

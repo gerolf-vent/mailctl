@@ -32,9 +32,11 @@ func listGrants(options db.RemotesSendGrantsListOptions) ([]db.RemoteSendGrant, 
 }
 
 var ListRemoteSendGrantsCmd = &cobra.Command{
-	Use:   "send-grants [name...]",
-	Short: "List send grants for remotes",
-	Args:  cobra.ArbitraryArgs,
+	Use:     "send-grants [flags] [<remote-name>...]",
+	Aliases: []string{"send-grant"},
+	Short:   "List send grants for remotes",
+	Long:    "List send grants for remotes.\nIf remote names are provided, only send grants for these remotes are listed.",
+	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

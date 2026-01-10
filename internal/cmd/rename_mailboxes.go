@@ -12,7 +12,7 @@ var RenameMailboxesCmd = &cobra.Command{
 	Use:     "mailbox <email> <new-email>",
 	Aliases: []string{"mailboxes"},
 	Short:   "Rename a mailbox",
-	Long:    "Rename a mailbox.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Rename a mailbox. This also supports changing the domain without loosing any of the aliases, or other relations.",
 	Args:    cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

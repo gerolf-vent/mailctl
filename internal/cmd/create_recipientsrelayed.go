@@ -10,10 +10,10 @@ import (
 )
 
 var CreateRecipientsRelayedCmd = &cobra.Command{
-	Use:     "recipients-relayed <email> [email...]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
-	Short:   "Create a new relayed recipient",
-	Long:    "Creates a new relayed recipient.\nEmails must be in the format \"name@example.com\".",
+	Use:     "recipients-relayed [flags] <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
+	Short:   "Creates new relayed recipients",
+	Long:    "Creates new relayed recipients.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDisabled, _ := cmd.Flags().GetBool("disabled")

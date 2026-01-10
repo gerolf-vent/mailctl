@@ -10,10 +10,10 @@ import (
 )
 
 var DisableMailboxesCmd = &cobra.Command{
-	Use:     "mailboxes <email> [email...]",
+	Use:     "mailboxes [flags] <email> [<email>...]",
 	Aliases: []string{"mailbox"},
-	Short:   "Disables mailboxes",
-	Long:    "Disables login, receiving, and/or sending for mailboxes.\nEmails must be in the format \"name@example.com\".\nIf no specific flags are provided, all three (login, receiving, sending) will be disabled.",
+	Short:   "Disables features on mailboxes",
+	Long:    "Disables login, receiving, and/or sending for mailboxes. Use flags to select which property to disable.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagLogin, _ := cmd.Flags().GetBool("login")

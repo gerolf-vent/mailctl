@@ -10,10 +10,10 @@ import (
 )
 
 var CreateAliasTargetsCmd = &cobra.Command{
-	Use:     "alias-target <alias-email> <target-email> [target-email...]",
-	Aliases: []string{"target"},
-	Short:   "Create a new alias target",
-	Long:    `Add a target to an alias. Both emails must be in the format name@domain.`,
+	Use:     "alias-targets [flags] <alias-email> <target-email> [<target-email>...]",
+	Aliases: []string{"alias-target", "targets", "target"},
+	Short:   "Creates new alias targets for an alias",
+	Long:    "Creates new alias targets for an alias.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagForward, _ := cmd.Flags().GetBool("forward")

@@ -12,7 +12,7 @@ var RenameDomainsCmd = &cobra.Command{
 	Use:     "domain <old-fqdn> <new-fqdn>",
 	Aliases: []string{"domains"},
 	Short:   "Rename a domain",
-	Long:    "Rename a domain by changing its FQDN.\nFQDNs must be valid domain names.",
+	Long:    "Rename a domain by changing its FQDN. All contained mailboxes, aliases, recipients, and other relations will be renamed too.",
 	Args:    cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argDomains := ParseDomainFQDNArgs(args)

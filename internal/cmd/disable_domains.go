@@ -9,10 +9,10 @@ import (
 )
 
 var DisableDomainsCmd = &cobra.Command{
-	Use:     "domains <fqdn> [fqdn...]",
+	Use:     "domains <fqdn> [<fqdn>...]",
 	Aliases: []string{"domain"},
 	Short:   "Disables domains",
-	Long:    "Disables domains.\nFQDNs must be valid domain names.",
+	Long:    "Disables domains.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argDomains := ParseDomainFQDNArgs(args)

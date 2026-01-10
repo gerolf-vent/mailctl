@@ -10,10 +10,10 @@ import (
 )
 
 var RestoreMailboxesCmd = &cobra.Command{
-	Use:     "mailboxes <email> [email...]",
+	Use:     "mailboxes <email> [<email>...]",
 	Aliases: []string{"mailbox"},
 	Short:   "Restores soft-deleted mailboxes",
-	Long:    "Restores soft-deleted mailboxes.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Restores soft-deleted mailboxes.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

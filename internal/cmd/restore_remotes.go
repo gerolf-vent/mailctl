@@ -8,9 +8,11 @@ import (
 )
 
 var RestoreRemotesCmd = &cobra.Command{
-	Use:   "remotes <name> [<name>...]",
-	Short: "Restore one or more soft-deleted remotes",
-	Args:  cobra.MinimumNArgs(1),
+	Use:     "remotes <name> [<name>...]",
+	Aliases: []string{"remote"},
+	Short:   "Restores soft-deleted remotes",
+	Long:    "Restores soft-deleted remotes.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		runner := db.TxForEachRunner[string]{
 			Items: args,

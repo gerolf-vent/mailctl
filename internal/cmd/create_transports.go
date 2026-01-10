@@ -8,10 +8,10 @@ import (
 )
 
 var CreateTransportsCmd = &cobra.Command{
-	Use:   "transport <name> [name...]",
-	Short: "Create a new transport",
-	Long:  "Creates a new mail transport configuration.",
-	Args:  cobra.MinimumNArgs(1),
+	Use:   "transport <name>",
+	Short: "Creates a new transport",
+	Long:  "Creates a new transport.",
+	Args:  cobra.ExactArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		name := args[0]
 		flagMethod, _ := cmd.Flags().GetString("method")

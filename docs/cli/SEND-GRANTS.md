@@ -14,7 +14,7 @@ Shows a table of all send grants or outputs them as JSON. Can be filtered by rem
 
 ### Usage
 ```sh
-mailctl list send-grants [name...] [flags]
+mailctl list send-grants [flags] [<remote-name>...]
 ```
 
 ### Flags
@@ -28,7 +28,7 @@ Creates a new send grant, allowing a remote to send as a specific email address 
 
 ### Usage
 ```sh
-mailctl create send-grant <remote> <email|domain> [flags]
+mailctl create send-grants <remote-name> <email> [<email>...]
 ```
 
 ### Examples
@@ -45,7 +45,7 @@ Soft-deletes a send grant. The send grant can be restored later. Use `--permanen
 
 ### Usage
 ```sh
-mailctl delete send-grant <remote> <email|domain> [flags]
+mailctl delete send-grants <remote-name> <email> [<email>...]
 ```
 
 ### Flags
@@ -57,5 +57,5 @@ Restores a soft-deleted send grant.
 
 ### Usage
 ```sh
-mailctl restore send-grant <remote> <email|domain>
+mailctl restore send-grants <remote-name> <email> [<email>...]
 ```

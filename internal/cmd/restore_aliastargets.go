@@ -10,10 +10,10 @@ import (
 )
 
 var RestoreAliasTargetsCmd = &cobra.Command{
-	Use:     "alias-target <alias-email> <target-email>",
-	Aliases: []string{"target"},
-	Short:   "Restore a soft-deleted alias target",
-	Long:    `Restore a soft-deleted target to an alias. Both emails must be in the format name@domain.`,
+	Use:     "alias-targets <alias-email> <target-email> [<target-email>...]",
+	Aliases: []string{"alias-target", "targets", "target"},
+	Short:   "Restores soft-deleted alias targets",
+	Long:    "Restore soft-deleted targets to an alias.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

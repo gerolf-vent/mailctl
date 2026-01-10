@@ -14,6 +14,6 @@ func init() {
 	DisableCmd.AddCommand(DisableAliasesCmd)
 	DisableCmd.AddCommand(DisableAliasTargetsCmd)
 	DisableCmd.AddCommand(DisableDomainCatchallTargetsCmd)
-	DisableCmd.AddCommand(DisableRecipientsRelayed)
+	DisableCmd.AddCommand(DisableRecipientsRelayedCmd)
 	DisableCmd.AddCommand(DisableRemotesCmd)
 }

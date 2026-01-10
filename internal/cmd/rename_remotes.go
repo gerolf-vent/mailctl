@@ -11,6 +11,7 @@ import (
 var RenameRemotesCmd = &cobra.Command{
 	Use:   "remote <old-name> <new-name>",
 	Short: "Rename a remote",
+	Long:  "Rename a remote by changing its name.",
 	Args:  cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		oldName := args[0]

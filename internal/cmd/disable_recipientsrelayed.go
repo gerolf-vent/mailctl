@@ -9,9 +9,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var DisableRecipientsRelayed = &cobra.Command{
-	Use:     "recipients-relayed <email> [email...]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
+var DisableRecipientsRelayedCmd = &cobra.Command{
+	Use:     "recipients-relayed <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
 	Short:   "Disables relayed recipients",
 	Long:    "Disables relayed recipients.",
 	Args:    cobra.MinimumNArgs(1),

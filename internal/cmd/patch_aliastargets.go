@@ -10,11 +10,11 @@ import (
 )
 
 var PatchAliasTargetsCmd = &cobra.Command{
-	Use:     "alias-target <email> [flags]",
-	Aliases: []string{"target"},
-	Short:   "Update an existing alias target",
-	Long:    "Updates properties of an existing alias target.",
-	Args:    cobra.ExactArgs(1),
+	Use:     "alias-targets [flags] <email> [<email>...]",
+	Aliases: []string{"alias-target", "targets", "target"},
+	Short:   "Updates existing alias targets",
+	Long:    "Updates specified properties for existing alias targets.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if !cmd.Flags().Changed("forward") && !cmd.Flags().Changed("send") {
 			return fmt.Errorf("at least one of --forward or --send flags must be specified")

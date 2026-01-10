@@ -33,7 +33,7 @@ func listTransports(options db.TransportsListOptions) ([]db.Transport, error) {
 }
 
 var ListTransportsCmd = &cobra.Command{
-	Use:   "transports",
+	Use:   "transports [flags]",
 	Short: "List transports",
 	Long:  "List all transports. Use --deleted to show only deleted transports, --all to show both active and deleted.",
 	RunE: func(cmd *cobra.Command, args []string) error {

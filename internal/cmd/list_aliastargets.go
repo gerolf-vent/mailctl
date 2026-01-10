@@ -32,9 +32,10 @@ func listAliasTargets(options db.AliasesTargetsListOptions) ([]db.AliasTarget, e
 }
 
 var ListAliasTargetsCmd = &cobra.Command{
-	Use:     "alias-targets [alias-email...]",
+	Use:     "alias-targets [flags] [<alias-email>...]",
 	Aliases: []string{"alias-target", "targets", "target"},
-	Short:   "List all targets for an alias",
+	Short:   "List alias targets",
+	Long:    "List alias targets. If aliases are provided, only targets for these aliases are listed.",
 	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")

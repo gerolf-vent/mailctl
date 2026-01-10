@@ -9,11 +9,11 @@ import (
 )
 
 var PatchTransportsCmd = &cobra.Command{
-	Use:     "transports <name> [flags]",
+	Use:     "transports [flags] <name> [<name>...]",
 	Aliases: []string{"transport"},
-	Short:   "Update an existing transport",
-	Long:    "Updates properties of an existing transport.",
-	Args:    cobra.ExactArgs(1),
+	Short:   "Updates existing transports",
+	Long:    "Updates specified properties of an existing transport.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagMethod, _ := cmd.Flags().GetString("method")
 		flagHost, _ := cmd.Flags().GetString("host")

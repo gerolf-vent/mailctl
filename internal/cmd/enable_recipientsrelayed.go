@@ -10,8 +10,8 @@ import (
 )
 
 var EnableRecipientsRelayedCmd = &cobra.Command{
-	Use:     "recipients-relayed <email> [email...]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
+	Use:     "recipients-relayed <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
 	Short:   "Enables relayed recipients",
 	Long:    "Enables relayed recipients.",
 	Args:    cobra.MinimumNArgs(1),

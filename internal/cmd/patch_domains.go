@@ -9,10 +9,10 @@ import (
 )
 
 var PatchDomainsCmd = &cobra.Command{
-	Use:     "domains <fqdn> [fqdn...]",
+	Use:     "domains [flags] <fqdn> [<fqdn>...]",
 	Aliases: []string{"domain"},
-	Short:   "Update an existing domain",
-	Long:    "Updates properties of an existing domain.\nFQDNs must be valid domain names.",
+	Short:   "Updates existing domains",
+	Long:    "Updates specified properties for existing domains.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagEnabled, _ := cmd.Flags().GetBool("enabled")

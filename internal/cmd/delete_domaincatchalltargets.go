@@ -10,10 +10,10 @@ import (
 )
 
 var DeleteDomainCatchallTargetsCmd = &cobra.Command{
-	Use:     "catchall-target <domain> <target-email> [target-email...]",
-	Aliases: []string{"catchall"},
-	Short:   "Delete a domain catch-all target",
-	Long:    `Delete a catch-all target from a domain. By default performs a soft delete. Use --permanent --force for hard delete.`,
+	Use:     "catchall-targets [flags] <domain> <target-email> [<target-email>...]",
+	Aliases: []string{"catchall-target", "catchalls", "catchall"},
+	Short:   "Deletes catch-all targets from a domain",
+	Long:    "Deletes catch-all targets from a domain. By default performs a soft delete. Use --permanent for hard delete.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")

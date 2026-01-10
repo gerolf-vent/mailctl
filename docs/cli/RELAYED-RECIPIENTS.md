@@ -16,7 +16,7 @@ Shows a table of all relayed recipients or outputs them as JSON. Can be filtered
 
 ### Usage
 ```sh
-mailctl list relayed-recipients [domain...] [flags]
+mailctl list relayed-recipients [flags] [<domain>...]
 ```
 
 ### Flags
@@ -30,22 +30,22 @@ Creates a new relayed recipient.
 
 ### Usage
 ```sh
-mailctl create recipients-relayed <email> [email...] [flags]
+mailctl create recipients-relayed [flags] <email> [<email>...]
 ```
 
 ### Flags
-- `--disabled bool` - Create relayed recipient in disabled state
+- `-d`, `--disabled` - Create relayed recipient in disabled state
 
 ## Patch
 Updates properties of an existing relayed recipient.
 
 ### Usage
 ```sh
-mailctl patch recipients-relayed <email> [email...] [flags]
+mailctl patch recipients-relayed [flags] <email> [<email>...]
 ```
 
 ### Flags
-- `--enabled bool` - Enable/disable relayed recipient
+- `-e`, `--enabled bool` - Enable/disable relayed recipient
 
 ## Rename
 Changes the email address of an existing relayed recipient (including domain).
@@ -60,7 +60,7 @@ Enables a disabled relayed recipient. It does not throw an error if the relayed 
 
 ### Usage
 ```sh
-mailctl enable recipients-relayed <email> [email...]
+mailctl enable recipients-relayed <email> [<email>...]
 ```
 
 ## Disable
@@ -68,7 +68,7 @@ Disables an active relayed recipient. It does not throw an error if the relayed 
 
 ### Usage
 ```sh
-mailctl disable recipients-relayed <email> [email...]
+mailctl disable recipients-relayed <email> [<email>...]
 ```
 
 ## Delete
@@ -76,7 +76,7 @@ Soft-deletes a relayed recipient. The relayed recipient can be restored later. U
 
 ### Usage
 ```sh
-mailctl delete recipients-relayed <email> [email...] [flags]
+mailctl delete recipients-relayed [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -88,5 +88,5 @@ Restores a soft-deleted relayed recipient.
 
 ### Usage
 ```sh
-mailctl restore recipients-relayed <email> [email...]
+mailctl restore recipients-relayed <email> [<email>...]
 ```

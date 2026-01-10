@@ -9,10 +9,10 @@ import (
 )
 
 var RestoreDomainsCmd = &cobra.Command{
-	Use:     "domains <fqdn> [fqdn...]",
+	Use:     "domains <fqdn> [<fqdn>...]",
 	Aliases: []string{"domain"},
 	Short:   "Restores soft-deleted domains",
-	Long:    "Restores soft-deleted domains.\nFQDNs must be valid domain names.",
+	Long:    "Restores soft-deleted domains.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argDomains := ParseDomainFQDNArgs(args)

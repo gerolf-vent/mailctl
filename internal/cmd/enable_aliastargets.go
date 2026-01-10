@@ -10,10 +10,10 @@ import (
 )
 
 var EnableAliasTargetsCmd = &cobra.Command{
-	Use:     "alias-target <alias-email> <target-email>",
-	Aliases: []string{"target"},
-	Short:   "Enable properties on an alias target",
-	Long:    `Enable forwarding and/or sending on an alias target. Use flags to select which property to enable.`,
+	Use:     "alias-targets [flags] <alias-email> <target-email> [<target-email>...]",
+	Aliases: []string{"alias-target", "targets", "target"},
+	Short:   "Enables features on alias targets of an alias",
+	Long:    `Enables forwarding and/or sending on an alias target. Use flags to select which property to enable.`,
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagForward, _ := cmd.Flags().GetBool("forward")

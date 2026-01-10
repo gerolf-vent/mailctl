@@ -10,11 +10,11 @@ import (
 )
 
 var PatchAliasesCmd = &cobra.Command{
-	Use:     "aliases <email> [flags]",
+	Use:     "aliases [flags] <email> [<email>...]",
 	Aliases: []string{"alias"},
-	Short:   "Update an existing alias",
-	Long:    "Updates properties of an existing alias. Emails must be in the format \"name@example.com\".",
-	Args:    cobra.ExactArgs(1),
+	Short:   "Updates an existing alias",
+	Long:    "Updates specified properties of an existing alias.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagEnabled, _ := cmd.Flags().GetBool("enabled")
 

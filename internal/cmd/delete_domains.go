@@ -9,10 +9,10 @@ import (
 )
 
 var DeleteDomainsCmd = &cobra.Command{
-	Use:     "domains <fqdn> [fqdn...]",
+	Use:     "domains [flags] <fqdn> [<fqdn>...]",
 	Aliases: []string{"domain"},
 	Short:   "Deletes domains",
-	Long:    "Deletes domains. By default performs a soft delete. Use --permanent for hard delete.\nFQDNs must be valid domain names.",
+	Long:    "Deletes domains. By default performs a soft delete. Use --permanent for hard delete.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")

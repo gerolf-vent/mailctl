@@ -10,11 +10,11 @@ import (
 )
 
 var PatchDomainCatchallTargetsCmd = &cobra.Command{
-	Use:     "catchall-targets <domain> <target> [flags]",
-	Aliases: []string{"catchall-target", "catchall"},
-	Short:   "Update an existing catchall target",
-	Long:    "Updates properties of an existing catchall target.",
-	Args:    cobra.ExactArgs(2),
+	Use:     "catchall-targets [flags] <domain> <target> [<target>...]",
+	Aliases: []string{"catchall-target", "catchalls", "catchall"},
+	Short:   "Updates existing catchall targets",
+	Long:    "Updates specified properties for existing catchall targets.",
+	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if !cmd.Flags().Changed("forward") && !cmd.Flags().Changed("fallback-only") {
 			return fmt.Errorf("at least one of --forward or --fallback-only flags must be specified")

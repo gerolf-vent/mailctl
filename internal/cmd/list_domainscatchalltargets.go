@@ -32,9 +32,11 @@ func listCatchallTargets(options db.DomainsCatchallTargetsListOptions) ([]db.Dom
 }
 
 var ListDomainCatchallTargetsCmd = &cobra.Command{
-	Use:     "catchall-targets [domain...]",
-	Aliases: []string{"catchall-target", "catchall"},
+	Use:     "catchall-targets [flags] [<domain>...]",
+	Aliases: []string{"catchall-target", "catchalls", "catchall"},
 	Short:   "List catch-all targets.",
+	Long:    "List catch-all targets. If domains are provided, only catch-all targets for these domains are listed.",
+	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

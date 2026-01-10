@@ -10,10 +10,10 @@ import (
 )
 
 var DisableAliasesCmd = &cobra.Command{
-	Use:     "aliases <email> [email...]",
+	Use:     "aliases <email> [<email>...]",
 	Aliases: []string{"alias"},
 	Short:   "Disables aliases",
-	Long:    "Disables aliases.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Disables aliases.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

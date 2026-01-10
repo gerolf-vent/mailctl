@@ -36,14 +36,14 @@ Creates a new domain of the specified type.
 
 ### Usage
 ```sh
-mailctl create domains <fqdn> [fqdn...] [flags]
+mailctl create domains [flags] <fqdn> [<fqdn>...]
 ```
 
 ### Flags
 - `-t`, `--type string` - Domain type: 'managed', 'relayed', 'alias' or 'canonical' (default: "managed")
 - `--transport string` - Transport name (required for managed/relayed domains)
 - `--target-domain string` - Target domain FQDN (required for canonical domains)
-- `--disabled` - Create in disabled state
+- `-d`, `--disabled` - Create in disabled state
 
 ### Examples
 ```sh
@@ -68,11 +68,11 @@ Updates properties of an existing domain.
 
 ### Usage
 ```sh
-mailctl patch domains <fqdn> [fqdn...] [flags]
+mailctl patch domains [flags] <fqdn> [<fqdn>...]
 ```
 
 ### Flags
-- `--enabled bool` - Enable or disable the domain
+- `-e`, `--enabled bool` - Enable or disable the domain
 - `--transport string` - New transport name (only for managed/relayed domains)
 - `--target-domain string` - New target domain FQDN (only for canonical domains)
 
@@ -98,7 +98,7 @@ Enables a disabled domain. It does not throw an error if the domain is already e
 
 ### Usage
 ```sh
-mailctl enable domains <fqdn> [fqdn...]
+mailctl enable domains <fqdn> [<fqdn>...]
 ```
 
 ## Disable
@@ -106,7 +106,7 @@ Disables an active domain. It does not throw an error if the domain is already d
 
 ### Usage
 ```sh
-mailctl disable domains <fqdn> [fqdn...]
+mailctl disable domains <fqdn> [<fqdn>...]
 ```
 
 ## Delete
@@ -114,7 +114,7 @@ Soft-deletes a domain. The domain can be restored later. Use `--permanent` to pe
 
 ### Usage
 ```sh
-mailctl delete domains <fqdn> [fqdn...] [flags]
+mailctl delete domains [flags] <fqdn> [<fqdn>...]
 ```
 
 ### Flags
@@ -126,5 +126,5 @@ Restores a soft-deleted domain.
 
 ### Usage
 ```sh
-mailctl restore domains <fqdn> [fqdn...]
+mailctl restore domains <fqdn> [<fqdn>...]
 ```

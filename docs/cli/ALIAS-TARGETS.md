@@ -14,7 +14,7 @@ Shows a table of all targets for one or more aliases or outputs them as JSON.
 
 ### Usage
 ```sh
-mailctl list alias-targets [alias-email...] [flags]
+mailctl list alias-targets [flags] [<alias-email>...]
 ```
 
 ### Flags
@@ -28,7 +28,7 @@ Creates a new alias target, adding one or more target addresses to an alias.
 
 ### Usage
 ```sh
-mailctl create alias-target <alias-email> <target-email> [target-email...] [flags]
+mailctl create alias-targets [flags] <alias-email> <target-email> [<target-email>...]
 ```
 
 ### Flags
@@ -52,7 +52,7 @@ Updates properties of an existing alias target.
 
 ### Usage
 ```sh
-mailctl patch alias-target <alias-email> <target-email> [flags]
+mailctl patch alias-targets [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -73,7 +73,7 @@ Enables forwarding and/or sending on an alias target. Use flags to select which 
 
 ### Usage
 ```sh
-mailctl enable alias-target <alias-email> <target-email> [<alias-email> <target-email>...] [flags]
+mailctl enable alias-targets [flags] <alias-email> <target-email> [<target-email>...]
 ```
 
 ### Flags
@@ -85,7 +85,7 @@ Disables forwarding and/or sending on an alias target. Use flags to select which
 
 ### Usage
 ```sh
-mailctl disable alias-target <alias-email> <target-email> [<alias-email> <target-email>...] [flags]
+mailctl disable alias-targets [flags] <alias-email> <target-email> [<target-email>...]
 ```
 
 ### Flags
@@ -97,7 +97,7 @@ Soft-deletes an alias target. The alias target can be restored later. Use `--per
 
 ### Usage
 ```sh
-mailctl delete alias-target <alias-email> <target-email> [<alias-email> <target-email>...] [flags]
+mailctl delete alias-targets [flags] <alias-email> <target-email> [<target-email>...]
 ```
 
 ### Flags
@@ -109,5 +109,5 @@ Restores a soft-deleted alias target.
 
 ### Usage
 ```sh
-mailctl restore alias-target <alias-email> <target-email> [<alias-email> <target-email>...]
+mailctl restore alias-targets <alias-email> <target-email> [<target-email>...]
 ```

@@ -8,9 +8,11 @@ import (
 )
 
 var DeleteRemotesCmd = &cobra.Command{
-	Use:   "remotes <name> [<name>...]",
-	Short: "Delete one or more remotes (soft delete by default)",
-	Args:  cobra.MinimumNArgs(1),
+	Use:     "remotes [flags] <name> [<name>...]",
+	Aliases: []string{"remote"},
+	Short:   "Deletes remotes",
+	Long:    "Deletes remotes. By default performs a soft delete. Use --permanent for hard delete.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")
 		flagForce, _ := cmd.Flags().GetBool("force")

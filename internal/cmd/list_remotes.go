@@ -32,8 +32,10 @@ func listRemotes(options db.RemotesListOptions) ([]db.Remote, error) {
 }
 
 var ListRemotesCmd = &cobra.Command{
-	Use:   "remotes",
-	Short: "List all remotes",
+	Use:   "remotes [flags]",
+	Short: "List remotes",
+	Long:  "List remotes.",
+	Args:  cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

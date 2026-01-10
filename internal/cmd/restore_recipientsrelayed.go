@@ -10,10 +10,10 @@ import (
 )
 
 var RestoreRecipientsRelayedCmd = &cobra.Command{
-	Use:     "recipients-relayed <email> [email...]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
+	Use:     "recipients-relayed <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
 	Short:   "Restores soft-deleted relayed recipients",
-	Long:    "Restores soft-deleted relayed recipients.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Restores soft-deleted relayed recipients.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

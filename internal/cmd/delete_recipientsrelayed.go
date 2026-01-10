@@ -10,10 +10,10 @@ import (
 )
 
 var DeleteRecipientsRelayedCmd = &cobra.Command{
-	Use:     "recipients-relayed <email> [email...]",
-	Aliases: []string{"recipient-relayed", "relayed-recipient", "relayed-recipients", "relayed"},
+	Use:     "recipients-relayed [flags] <email> [<email>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
 	Short:   "Deletes relayed recipients",
-	Long:    "Deletes relayed recipients. By default performs a soft delete. Use --permanent for hard delete.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Deletes relayed recipients. By default performs a soft delete. Use --permanent for hard delete.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")

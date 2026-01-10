@@ -29,16 +29,14 @@ Creates a new remote SMTP relay server configuration.
 
 ### Usage
 ```sh
-mailctl create remotes <name> [<name>...] [flags]
+mailctl create remotes <hostname> [<hostname>...] [flags]
 ```
 
 ### Flags
-- `-u`, `--username string` - SMTP username (required)
 - `-p`, `--password` - Set password interactively
 - `--password-method string` - Password hashing method (default: "bcrypt", options: "bcrypt" or "argon2id")
-- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
+- `--password-hash-options string` - Password hash options (bcrypt: `<cost>`; argon2id: m=`<number>`,t=`<number>`,p=`<number>`)
 - `--password-stdin` - Set password from stdin
-- `--port int` - SMTP port (default: 25)
 - `-d`, `--disabled` - Create remote in disabled state
 
 ### Examples
@@ -64,14 +62,14 @@ Updates properties of an existing remote.
 
 ### Usage
 ```sh
-mailctl patch remote <name> [flags]
+mailctl patch remotes [flags] <hostname> [<hostname>...]
 ```
 
 ### Flags
 - `-e`, `--enabled bool` - Enable or disable the remote
 - `-p`, `--password` - Update password interactively
 - `--password-method string` - Password hashing method (default: "bcrypt", options: "bcrypt" or "argon2id")
-- `--password-hash-options string` - Password hash options (bcrypt: <cost>; argon2id: m=<number>,t=<number>,p=<number>)
+- `--password-hash-options string` - Password hash options (bcrypt: `<cost>`; argon2id: m=`<number>`,t=`<number>`,p=`<number>`)
 - `--password-stdin` - Set password from stdin
 - `--no-password` - Remove password
 
@@ -106,7 +104,7 @@ Enables a disabled remote. It does not throw an error if the remote is already e
 
 ### Usage
 ```sh
-mailctl enable remotes <hostname> [hostname...]
+mailctl enable remotes <name> [<name>...]
 ```
 
 ## Disable
@@ -114,7 +112,7 @@ Disables an active remote. It does not throw an error if the remote is already d
 
 ### Usage
 ```sh
-mailctl disable remotes <hostname> [hostname...]
+mailctl disable remotes <name> [<name>...]
 ```
 
 ## Delete
@@ -122,7 +120,7 @@ Soft-deletes a remote. The remote can be restored later. Use `--permanent` to pe
 
 ### Usage
 ```sh
-mailctl delete remotes <hostname> [hostname...] [flags]
+mailctl delete remotes [flags] <name> [<name>...]
 ```
 
 ### Flags
@@ -134,5 +132,5 @@ Restores a soft-deleted remote.
 
 ### Usage
 ```sh
-mailctl restore remotes <hostname> [hostname...]
+mailctl restore remotes <name> [<name>...]
 ```

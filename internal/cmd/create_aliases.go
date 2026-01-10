@@ -10,11 +10,11 @@ import (
 )
 
 var CreateAliasesCmd = &cobra.Command{
-	Use:     "aliases <email> <target> [target...]",
+	Use:     "aliases [flags] <email> [<email>...]",
 	Aliases: []string{"alias"},
-	Short:   "Create a new alias",
-	Long:    "Creates a new alias with the specified target addresses.\nEmails must be in the format \"name@example.com\".",
-	Args:    cobra.MinimumNArgs(2),
+	Short:   "Creates new aliases",
+	Long:    "Creates new aliases.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDisabled, _ := cmd.Flags().GetBool("disabled")
 

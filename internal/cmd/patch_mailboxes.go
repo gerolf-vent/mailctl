@@ -10,10 +10,11 @@ import (
 )
 
 var PatchMailboxesCmd = &cobra.Command{
-	Use:   "mailbox <email>",
-	Short: "Update an existing mailbox",
-	Long:  "Updates properties of an existing mailbox.",
-	Args:  cobra.ExactArgs(1),
+	Use:     "mailboxes [flags] <email> [<email>...]",
+	Aliases: []string{"mailbox"},
+	Short:   "Updates existing mailboxes",
+	Long:    "Updates specified properties for existing mailboxes.",
+	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
@@ -29,12 +30,14 @@ var PatchMailboxesCmd = &cobra.Command{
 			return fmt.Errorf("cannot use both --password and --password-stdin")
 		}
 
+		if len(args) > 1 && (flagPassword || flagPasswordStdin) {
+			return fmt.Errorf("cannot set password while updating multiple mailboxes")
+		}
+
 		argEmails := ParseEmailArgs(args)
 		if len(argEmails) != len(args) {
 			return fmt.Errorf("invalid email arguments")
 		}
-
-		argEmail := argEmails[0]
 
 		options := db.MailboxesPatchOptions{}
 		if flagPassword || flagPasswordStdin {
@@ -77,11 +80,12 @@ var PatchMailboxesCmd = &cobra.Command{
 			options.Sending = &v
 		}
 
-		runner := db.TxRunner{
-			Exec: func(tx *sql.Tx) error {
-				return db.Mailboxes(tx).Patch(argEmail, options)
+		runner := db.TxForEachRunner[utils.EmailAddress]{
+			Items: argEmails,
+			Exec: func(tx *sql.Tx, item utils.EmailAddress) error {
+				return db.Mailboxes(tx).Patch(item, options)
 			},
-			ItemString:     argEmail.String(),
+			ItemString:     func(item utils.EmailAddress) string { return item.String() },
 			FailureMessage: "failed to patch mailbox",
 			SuccessMessage: "Successfully patched mailbox",
 		}

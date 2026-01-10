@@ -32,10 +32,11 @@ func listRelayedRecipients(options db.RecipientsRelayedListOptions) ([]db.Recipi
 }
 
 var ListRecipientsRelayedCmd = &cobra.Command{
-	Use:   "relayed-recipients [domain...]",
-	Short: "List relayed recipients",
-	Long:  "List relayed recipients.\nIf domains are provided, only recipients for these domains are listed.",
-	Args:  cobra.MinimumNArgs(0),
+	Use:     "relayed-recipients [flags] [<domain>...]",
+	Aliases: []string{"recipient-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
+	Short:   "List relayed recipients",
+	Long:    "List relayed recipients.\nIf domains are provided, only recipients for these domains are listed.",
+	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

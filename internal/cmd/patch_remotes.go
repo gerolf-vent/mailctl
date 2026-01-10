@@ -10,11 +10,12 @@ import (
 )
 
 var PatchRemotesCmd = &cobra.Command{
-	Use:   "remote <hostname> [flags]",
-	Short: "Update an existing remote",
-	Long:  "Updates properties of an existing remote.",
-	Args:  cobra.ExactArgs(1),
+	Use:   "remotes [flags] <hostname> [<hostname>...]",
+	Short: "Updates existing remotes",
+	Long:  "Updates specified properties for existing remotes.",
+	Args:  cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		flagEnabled, _ := cmd.Flags().GetBool("enabled")
 		flagPassword, _ := cmd.Flags().GetBool("password")
 		flagPasswordStdin, _ := cmd.Flags().GetBool("password-stdin")
 		flagPasswordMethod, _ := cmd.Flags().GetString("password-method")
@@ -29,16 +30,17 @@ var PatchRemotesCmd = &cobra.Command{
 			return fmt.Errorf("cannot use both --password and --password-stdin")
 		}
 
+		if len(args) > 1 && (flagPassword || flagPasswordStdin) {
+			return fmt.Errorf("cannot set password while updating multiple remotes")
+		}
+
 		if !flagPassword && !flagPasswordStdin && !flagPasswordNo && !cmd.Flags().Changed("enabled") {
 			return fmt.Errorf("no changes specified. Use --password, --no-password, or --enabled flags")
 		}
 
-		name := args[0]
-
 		options := db.RemotesPatchOptions{}
 
 		if cmd.Flags().Changed("enabled") {
-			flagEnabled, _ := cmd.Flags().GetBool("enabled")
 			options.Enabled = &flagEnabled
 		}
 
@@ -59,11 +61,12 @@ var PatchRemotesCmd = &cobra.Command{
 			}
 		}
 
-		runner := db.TxRunner{
-			Exec: func(tx *sql.Tx) error {
-				return db.Remotes(tx).Patch(name, options)
+		runner := db.TxForEachRunner[string]{
+			Items: args,
+			Exec: func(tx *sql.Tx, item string) error {
+				return db.Remotes(tx).Patch(item, options)
 			},
-			ItemString:     name,
+			ItemString:     func(item string) string { return item },
 			FailureMessage: "failed to patch remote",
 			SuccessMessage: "Successfully patched remote",
 		}

@@ -36,7 +36,7 @@ mailctl create transport <name> [flags]
 - `-m`, `--method string` - Transport method (required)
 - `-H`, `--host string` - Transport host (required)
 - `-p`, `--port uint16` - Transport port
-- `-x`, `--mx-lookup bool` - Enable MX lookup for this transport
+- `--mx-lookup bool` - Enable MX lookup for this transport
 
 ### Examples
 ```sh
@@ -55,14 +55,14 @@ Updates properties of an existing transport.
 
 ### Usage
 ```sh
-mailctl patch transports <name> [name...] [flags]
+mailctl patch transports [flags] <name> [<name>...]
 ```
 
 ### Flags
 - `-m`, `--method string` - Transport method
 - `-H`, `--host string` - Transport host
 - `-p`, `--port uint16` - Transport port
-- `-x`, `--mx-lookup bool` - Enable MX lookup for this transport
+- `--mx-lookup bool` - Enable MX lookup for this transport
 
 ### Examples
 ```sh
@@ -89,7 +89,7 @@ Soft-deletes a transport. The transport can be restored later. Use `--permanent`
 
 ### Usage
 ```sh
-mailctl delete transports <name> [name...] [flags]
+mailctl delete transports [flags] <name> [<name>...]
 ```
 
 ### Flags
@@ -101,5 +101,5 @@ Restores a soft-deleted transport.
 
 ### Usage
 ```sh
-mailctl restore transports <name> [name...]
+mailctl restore transports <name> [<name>...]
 ```

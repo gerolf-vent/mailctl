@@ -15,7 +15,7 @@ Shows a table of all aliases or outputs them as JSON. Can be filtered by domain.
 
 ### Usage
 ```sh
-mailctl list aliases [domain...] [flags]
+mailctl list aliases [flags] [<domain>...]
 ```
 
 ### Flags
@@ -29,8 +29,11 @@ Creates a new alias. Note: After creating an alias, you need to add targets usin
 
 ### Usage
 ```sh
-mailctl create aliases <email> [email...] [flags]
+mailctl create aliases [flags] <email> [<email>...]
 ```
+
+### Flags
+- `-d`, `--disabled` - Create the alias in disabled state
 
 ### Examples
 ```sh
@@ -46,11 +49,11 @@ Updates properties of an existing alias.
 
 ### Usage
 ```sh
-mailctl patch aliases <email> [email...] [flags]
+mailctl patch aliases [flags] <email> [<email>...]
 ```
 
 ### Flags
-- `--enabled bool` - Enable or disable the alias
+- `-e`, `--enabled bool` - Enable or disable the alias
 
 ## Rename
 Changes the email address of an existing alias (including domain).
@@ -65,7 +68,7 @@ Enables a disabled alias. It does not throw an error if the alias is already ena
 
 ### Usage
 ```sh
-mailctl enable aliases <email> [email...]
+mailctl enable aliases <email> [<email>...]
 ```
 
 ## Disable
@@ -73,7 +76,7 @@ Disables an active alias. It does not throw an error if the alias is already dis
 
 ### Usage
 ```sh
-mailctl disable aliases <email> [email...]
+mailctl disable aliases <email> [<email>...]
 ```
 
 ## Delete
@@ -81,7 +84,7 @@ Soft-deletes an alias. The alias can be restored later. Use `--permanent` to per
 
 ### Usage
 ```sh
-mailctl delete aliases <email> [email...] [flags]
+mailctl delete aliases [flags] <email> [<email>...]
 ```
 
 ### Flags
@@ -93,5 +96,5 @@ Restores a soft-deleted alias.
 
 ### Usage
 ```sh
-mailctl restore aliases <email> [email...]
+mailctl restore aliases <email> [<email>...]
 ```

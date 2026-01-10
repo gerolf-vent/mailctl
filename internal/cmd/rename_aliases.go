@@ -12,7 +12,7 @@ var RenameAliasesCmd = &cobra.Command{
 	Use:     "alias <email> <new-email>",
 	Aliases: []string{"aliases"},
 	Short:   "Rename an alias",
-	Long:    "Rename an alias.\nEmail must be in the format \"name@example.com\".",
+	Long:    "Rename an alias by changing its email address. This also supports changing the domain without loosing any of the targets or other relations.",
 	Args:    cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

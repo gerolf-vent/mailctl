@@ -10,10 +10,10 @@ import (
 )
 
 var EnableDomainCatchallTargetsCmd = &cobra.Command{
-	Use:     "catchall-targets <domain> <target-email> [target-email...]",
-	Aliases: []string{"catchall-target", "catchall"},
-	Short:   "Enable forwarding on a domain catch-all target",
-	Long:    `Enable forwarding on a domain catch-all target.`,
+	Use:     "catchall-targets <domain> <target-email> [<target-email>...]",
+	Aliases: []string{"catchall-target", "catchalls", "catchall"},
+	Short:   "Enables forwarding on catch-all targets of a domain",
+	Long:    "Enables forwarding on catch-all targets of a domain.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argDomain := args[0]

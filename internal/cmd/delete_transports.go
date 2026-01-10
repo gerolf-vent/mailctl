@@ -8,10 +8,10 @@ import (
 )
 
 var DeleteTransportsCmd = &cobra.Command{
-	Use:     "transports <name> [name...]",
+	Use:     "transports [flags] <name> [<name>...]",
 	Aliases: []string{"transport"},
-	Short:   "Delete a transport",
-	Long:    "Delete a transport. By default performs a soft delete.",
+	Short:   "Deletes transports",
+	Long:    "Deletes transports. By default performs a soft delete. Use --permanent for hard delete.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPermanent, _ := cmd.Flags().GetBool("permanent")

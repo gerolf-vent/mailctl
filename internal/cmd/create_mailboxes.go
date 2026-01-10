@@ -10,10 +10,10 @@ import (
 )
 
 var CreateMailboxesCmd = &cobra.Command{
-	Use:     "mailboxes <email> [email...]",
+	Use:     "mailboxes <email> [<email>...]",
 	Aliases: []string{"mailbox"},
-	Short:   "Create a new mailbox",
-	Long:    "Creates a new mailbox with the specified email address.\nEmails must be in the format \"name@example.com\".",
+	Short:   "Creates new mailboxes",
+	Long:    "Creates new mailboxes.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagPassword, _ := cmd.Flags().GetBool("password")
@@ -30,7 +30,7 @@ var CreateMailboxesCmd = &cobra.Command{
 			return fmt.Errorf("cannot use both --password and --password-stdin")
 		}
 
-		if len(args) > 0 && (flagPassword || flagPasswordStdin) {
+		if len(args) > 1 && (flagPassword || flagPasswordStdin) {
 			return fmt.Errorf("cannot set password while creating multiple mailboxes")
 		}
 

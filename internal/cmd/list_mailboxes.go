@@ -32,10 +32,11 @@ func listMailboxes(options db.MailboxesListOptions) ([]db.Mailbox, error) {
 }
 
 var ListMailboxesCmd = &cobra.Command{
-	Use:   "mailboxes [domain...]",
-	Short: "List mailboxes",
-	Long:  "List mailboxes.\nIf domains are provided, only mailboxes for these domains are listed.",
-	Args:  cobra.MinimumNArgs(0),
+	Use:     "mailboxes [flags] [<domain>...]",
+	Aliases: []string{"mailbox"},
+	Short:   "List mailboxes",
+	Long:    "List mailboxes.\nIf domains are provided, only mailboxes for these domains are listed.",
+	Args:    cobra.ArbitraryArgs,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		flagDeleted, _ := cmd.Flags().GetBool("deleted")
 		flagAll, _ := cmd.Flags().GetBool("all")

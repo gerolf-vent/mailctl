@@ -15,7 +15,7 @@ Shows a table of all catchall targets or outputs them as JSON. Can be filtered b
 
 ### Usage
 ```sh
-mailctl list catchall-targets [domain...] [flags]
+mailctl list catchall-targets [flags] [<domain>...]
 ```
 
 ### Flags
@@ -29,12 +29,12 @@ Creates a new catchall target for a domain.
 
 ### Usage
 ```sh
-mailctl create catchall-targets <domain> <target-email> [target-email...] [flags]
+mailctl create catchall-targets [flags] <domain> <target-email> [<target-email>...]
 ```
 
 ### Flags
 - `-f`, `--forward bool` - Enable forwarding to target (default: true)
-- `-b`, `--only-fallback bool` - Only forward if no other recipient matched (default: true)
+- `-b`, `--fallback-only bool` - Only forward if no other recipient matched (default: true)
 
 ### Examples
 ```sh
@@ -53,12 +53,12 @@ Updates properties of an existing catchall target.
 
 ### Usage
 ```sh
-mailctl patch catchall-targets <domain> <target-email> [target-email...] [flags]
+mailctl patch catchall-targets [flags] <domain> <target> [<target>...]
 ```
 
 ### Flags
 - `-f`, `--forward bool` - Enable/disable forwarding to target
-- `-b`, `--only-fallback bool` - Enable/disable only-fallback behavior
+- `-b`, `--fallback-only bool` - Enable/disable fallback-only behavior
 
 ### Examples
 ```sh
@@ -71,7 +71,7 @@ Enables a disabled catchall target. This will affect the forwarding capability o
 
 ### Usage
 ```sh
-mailctl enable catchall-targets <domain> <target> [<domain> <target>...]
+mailctl enable catchall-targets <domain> <target> [<target>...]
 ```
 
 ## Disable
@@ -79,7 +79,7 @@ Disables an active catchall target. This will affect the forwarding capability o
 
 ### Usage
 ```sh
-mailctl disable catchall-target <domain> <target> [<domain> <target>...]
+mailctl disable catchall-targets <domain> <target> [<target>...]
 ```
 
 ## Delete
@@ -87,7 +87,7 @@ Soft-deletes a catchall target. The catchall target can be restored later. Use `
 
 ### Usage
 ```sh
-mailctl delete catchall-target <domain> <target> [<domain> <target>...] [flags]
+mailctl delete catchall-targets [flags] <domain> <target-email> [<target-email>...]
 ```
 
 ### Flags
@@ -99,5 +99,5 @@ Restores a soft-deleted catchall target.
 
 ### Usage
 ```sh
-mailctl restore catchall-targets <domain> <target> [<domain> <target>...]
+mailctl restore catchall-targets <domain> <target-email> [<target-email>...]
 ```

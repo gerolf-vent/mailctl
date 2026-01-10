@@ -10,9 +10,9 @@ import (
 
 var RenameRecipientsRelayedCmd = &cobra.Command{
 	Use:     "recipient-relayed <email> <new-email>",
-	Aliases: []string{"relayed-recipient", "relayed"},
+	Aliases: []string{"recipients-relayed", "relayed-recipients", "relayed-recipient", "relayed"},
 	Short:   "Rename a relayed recipient",
-	Long:    "Rename a relayed recipient.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Rename a relayed recipient. This also supports changing the domain without loosing any of the relations.",
 	Args:    cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)

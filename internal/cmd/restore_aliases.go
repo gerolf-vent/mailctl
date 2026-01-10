@@ -10,10 +10,10 @@ import (
 )
 
 var RestoreAliasesCmd = &cobra.Command{
-	Use:     "aliases <email> [email...]",
+	Use:     "aliases <email> [<email>...]",
 	Aliases: []string{"alias"},
 	Short:   "Restores soft-deleted aliases",
-	Long:    "Restores soft-deleted aliases.\nEmails must be in the format \"name@example.com\".",
+	Long:    "Restores soft-deleted aliases.",
 	Args:    cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argEmails := ParseEmailArgs(args)
