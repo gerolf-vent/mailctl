@@ -11,8 +11,8 @@ import (
 var RenameTransportsCmd = &cobra.Command{
 	Use:     "transport <old-name> <new-name>",
 	Aliases: []string{"transports"},
-	Short:   "Rename a transport",
-	Long:    "Rename a transport by changing its name.",
+	Short:   "Renames a transport",
+	Long:    "Renames a transport by changing its name.",
 	Args:    cobra.ExactArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		oldName := args[0]

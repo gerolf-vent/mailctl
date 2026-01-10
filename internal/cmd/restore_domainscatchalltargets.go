@@ -12,8 +12,8 @@ import (
 var RestoreDomainCatchallTargetsCmd = &cobra.Command{
 	Use:     "catchall-targets <domain> <target-email> [<target-email>...]",
 	Aliases: []string{"catchall-target", "catchalls", "catchall"},
-	Short:   "Restore a soft-deleted domain catch-all target",
-	Long:    "Restore a soft-deleted domain catch-all target.",
+	Short:   "Restores soft-deleted domain catch-all targets",
+	Long:    "Restores soft-deleted domain catch-all targets.",
 	Args:    cobra.MinimumNArgs(2),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		argDomain := args[0]
