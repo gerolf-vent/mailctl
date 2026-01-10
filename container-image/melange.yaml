@@ -1,8 +1,8 @@
 package:
   name: mailctl
-  version: 0.1.4
+  version: 0.1.5
   epoch: 0
-  description: Egress controller for MetalLB
+  description: Another mail system configuration manager 
   target-architecture:
     - all
   copyright:
