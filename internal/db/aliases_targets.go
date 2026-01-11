@@ -15,7 +15,7 @@ type AliasTarget struct {
 	TargetEmail               string     `json:"targetEmail"`
 	IsForeign                 bool       `json:"isForeign"`
 	ForwardingToTargetEnabled bool       `json:"forwardingEnabled"`
-	SendingFromTargetEnabled  *bool      `json:"sendingEnabled,omitempty"` // Only for recursive
+	SendingFromTargetEnabled  bool       `json:"sendingEnabled"` // Only for recursive
 	CreatedAt                 time.Time  `json:"createdAt"`
 	UpdatedAt                 time.Time  `json:"updatedAt"`
 	DeletedAt                 *time.Time `json:"deletedAt,omitempty"`
@@ -26,7 +26,7 @@ type AliasTarget struct {
 
 type AliasesTargetsCreateOptions struct {
 	ForwardEnabled bool
-	SendEnabled    *bool
+	SendEnabled    bool
 }
 
 type AliasesTargetsPatchOptions struct {
@@ -143,7 +143,7 @@ func (r *aliasesTargetsRepository) List(options AliasesTargetsListOptions) ([]Al
 		at.TargetEmail = fmt.Sprintf("%s@%s", targetName, targetDomain)
 
 		if sendingEnabled.Valid {
-			at.SendingFromTargetEnabled = &sendingEnabled.Bool
+			at.SendingFromTargetEnabled = sendingEnabled.Bool
 		}
 
 		if deletedAt.Valid {
@@ -215,7 +215,7 @@ func (r *aliasesTargetsRepository) Create(aliasEmail utils.EmailAddress, targetE
 				options.SendEnabled,
 			)
 	} else {
-		if options.SendEnabled != nil {
+		if options.SendEnabled == true {
 			err = errors.New("sending from foreign targets is not supported")
 			return
 		}

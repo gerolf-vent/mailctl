@@ -29,9 +29,7 @@ var CreateAliasTargetsCmd = &cobra.Command{
 
 		options := db.AliasesTargetsCreateOptions{
 			ForwardEnabled: flagForward,
-		}
-		if cmd.Flags().Changed("send") {
-			options.SendEnabled = &flagSend
+			SendEnabled:    flagSend,
 		}
 
 		runner := db.TxForEachRunner[utils.EmailAddress]{
