@@ -100,7 +100,18 @@ func (r *remotesSendGrantsRepository) List(options RemotesSendGrantsListOptions)
 	for rows.Next() {
 		var sg RemoteSendGrant
 		var deletedAt sql.NullTime
-		if err := rows.Scan(&sg.ID, &sg.RemoteID, &sg.RemoteName, &sg.DomainID, &sg.DomainFQDN, &sg.Name, &sg.CreatedAt, &sg.UpdatedAt, &deletedAt); err != nil {
+		if err := rows.Scan(
+			&sg.ID,
+			&sg.RemoteID,
+			&sg.RemoteName,
+			&sg.DomainID,
+			&sg.DomainFQDN,
+			&sg.DomainEnabled,
+			&sg.Name,
+			&sg.CreatedAt,
+			&sg.UpdatedAt,
+			&deletedAt,
+		); err != nil {
 			return nil, err
 		}
 		if deletedAt.Valid {

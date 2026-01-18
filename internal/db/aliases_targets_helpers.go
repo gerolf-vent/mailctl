@@ -25,11 +25,12 @@ func queryAliasesTargetsIdAndTable(r sq.BaseRunner, aliasEmail, targetEmail util
 	err := sq.
 		Select("atr.ID").
 		From("aliases_targets_recursive atr").
-		Join("domains d ON a.domain_id = d.ID").
+		Join("recipients r ON atr.recipient_id = r.ID").
+		Join("domains d ON r.domain_id = d.ID").
 		Where(sq.Expr("atr.alias_id = (?)", aliasIdQ)).
 		Where(sq.Eq{
-			"d.fqdn":   targetEmail.DomainFQDN,
-			"atr.name": targetEmail.LocalPart,
+			"d.fqdn": targetEmail.DomainFQDN,
+			"r.name": targetEmail.LocalPart,
 		}).
 		PlaceholderFormat(sq.Dollar).
 		RunWith(r).

@@ -92,7 +92,15 @@ func (r *remotesRepository) List(options RemotesListOptions) ([]Remote, error) {
 	for rows.Next() {
 		var rr Remote
 		var deletedAt sql.NullTime
-		if err := rows.Scan(&rr.ID, &rr.Name, &rr.Enabled, &rr.PasswordSet, &rr.CreatedAt, &rr.UpdatedAt, &deletedAt); err != nil {
+		if err := rows.Scan(
+			&rr.ID,
+			&rr.Name,
+			&rr.Enabled,
+			&rr.PasswordSet,
+			&rr.CreatedAt,
+			&rr.UpdatedAt,
+			&deletedAt,
+		); err != nil {
 			return nil, err
 		}
 		if deletedAt.Valid {

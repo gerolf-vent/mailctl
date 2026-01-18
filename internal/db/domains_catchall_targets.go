@@ -97,7 +97,17 @@ func (r *domainsCatchallTargetsRepository) List(options DomainsCatchallTargetsLi
 		var deletedAt sql.NullTime
 		var domainEnabled sql.NullBool
 
-		err := rows.Scan(&td.DomainFQDN, &targetDomain, &targetName, &td.ForwardingToTargetEnabled, &td.FallbackOnly, &td.CreatedAt, &td.UpdatedAt, &deletedAt, &domainEnabled)
+		err := rows.Scan(
+			&td.DomainFQDN,
+			&targetDomain,
+			&targetName,
+			&td.ForwardingToTargetEnabled,
+			&td.FallbackOnly,
+			&td.CreatedAt,
+			&td.UpdatedAt,
+			&deletedAt,
+			&domainEnabled,
+		)
 		if err != nil {
 			return nil, err
 		}
@@ -121,9 +131,9 @@ func (r *domainsCatchallTargetsRepository) Create(srcDomainFQDN string, targetEm
 	q := sq.Insert("domains_catchall_targets").
 		Columns(
 			"domain_id",
-			"target_id",
+			"recipient_id",
 			"forwarding_to_target_enabled",
-			"only_fallback",
+			"fallback_only",
 		).
 		Values(
 			sq.Expr("(?)", sq.
@@ -163,7 +173,7 @@ func (r *domainsCatchallTargetsRepository) Patch(srcDomainFQDN string, targetEma
 			},
 			).Limit(1),
 		)).
-		Where(sq.Expr("target_id = (?)", sq.
+		Where(sq.Expr("recipient_id = (?)", sq.
 			Select("r.ID").
 			From("recipients r").
 			Where(sq.Expr("domain_id = (?)", sq.
@@ -184,7 +194,7 @@ func (r *domainsCatchallTargetsRepository) Patch(srcDomainFQDN string, targetEma
 		q = q.Set("forwarding_to_target_enabled", *options.ForwardingToTargetEnabled)
 	}
 	if options.FallbackOnly != nil {
-		q = q.Set("only_fallback", *options.FallbackOnly)
+		q = q.Set("fallback_only", *options.FallbackOnly)
 	}
 
 	return Exec(r.r, q, 1)
@@ -200,7 +210,7 @@ func (r *domainsCatchallTargetsRepository) Delete(srcDomainFQDN string, targetEm
 		Limit(1),
 	)
 
-	targetIdExpr := sq.Expr("target_id = (?)", sq.
+	targetIdExpr := sq.Expr("recipient_id = (?)", sq.
 		Select("r.ID").
 		From("recipients r").
 		Where(sq.Expr("domain_id = (?)", sq.
@@ -253,7 +263,7 @@ func (r *domainsCatchallTargetsRepository) Restore(srcDomainFQDN string, targetE
 			}).
 			Limit(1),
 		)).
-		Where(sq.Expr("target_id = (?)", sq.
+		Where(sq.Expr("recipient_id = (?)", sq.
 			Select("r.ID").
 			From("recipients r").
 			Where(sq.Expr("domain_id = (?)", sq.
